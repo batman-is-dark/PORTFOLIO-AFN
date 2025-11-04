@@ -1,0 +1,24 @@
+/* Visually hidden until focused */
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skipLink:focus,
+.skipLink:focus-visible {
+  position: fixed;
+  left: var(--space-3);
+  top: var(--space-3);
+  width: auto;
+  height: auto;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius-2);
+  outline: none;
+  z-index: var(--z-5);
+}

@@ -1,0 +1,39 @@
+/* Theme definitions (light/dark) with contrast-safe palettes */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Light theme (WCAG AA) */
+  --color-bg: #ffffff;
+  --color-fg: #0a0a0a;
+  --color-muted: #52525b; /* slate-600 */
+  --color-border: #e5e7eb; /* gray-200 */
+  --color-accent: #2563eb; /* blue-600 */
+  --color-accent-contrast: #ffffff;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Dark theme (WCAG AA) */
+  --color-bg: #0b0b0b;
+  --color-fg: #e5e7eb;
+  --color-muted: #9ca3af; /* gray-400 */
+  --color-border: #262626; /* neutral-800 */
+  --color-accent: #60a5fa; /* blue-400 */
+  --color-accent-contrast: #0b0b0b;
+}
+
+/* Auto-apply dark when no explicit theme is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --color-bg: #0b0b0b;
+    --color-fg: #e5e7eb;
+    --color-muted: #9ca3af;
+    --color-border: #262626;
+    --color-accent: #60a5fa;
+    --color-accent-contrast: #0b0b0b;
+  }
+}

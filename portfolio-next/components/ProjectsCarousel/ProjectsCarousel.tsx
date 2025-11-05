@@ -82,6 +82,7 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
       className="overflow-hidden relative"
       role="region"
       aria-label="Projects carousel"
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

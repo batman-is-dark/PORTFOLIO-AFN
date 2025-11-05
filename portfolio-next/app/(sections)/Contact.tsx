@@ -16,7 +16,7 @@ export function Contact() {
         </h2>
         
         <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          I'm always open to discussing new projects, research opportunities, or collaborations.
+          I&apos;m always open to discussing new projects, research opportunities, or collaborations.
           Feel free to reach out through email or connect with me on LinkedIn and GitHub.
         </p>
 

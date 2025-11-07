@@ -33,13 +33,7 @@ html {
 }
 
 body {
-  background: var(--color-bg);
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(214, 195, 165, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 10% 90%, rgba(239, 68, 68, 0.06) 0%, transparent 35%),
-    radial-gradient(circle at 90% 10%, rgba(34, 197, 94, 0.06) 0%, transparent 35%);
+  background: linear-gradient(135deg, #0B1120 0%, #1a1f35 50%, #0f1419 100%);
   background-attachment: fixed;
   color: var(--color-fg);
   font-family: var(--font-sans);
@@ -49,6 +43,7 @@ body {
   position: relative;
 }
 
+/* Animated gradient orbs background */
 body::before {
   content: '';
   position: fixed;
@@ -57,12 +52,54 @@ body::before {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-    linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
+    radial-gradient(ellipse at 10% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 10%, rgba(236, 72, 153, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(251, 146, 60, 0.08) 0%, transparent 45%);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
+  animation: subtle-shift 20s ease-in-out infinite;
+}
+
+/* Subtle grid pattern overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+@keyframes subtle-shift {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.6;
+  }
 }
 
 body > * {

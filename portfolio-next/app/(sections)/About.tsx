@@ -16,8 +16,26 @@ export function About() {
   ];
 
   return (
-    <section aria-labelledby="about-heading" className="py-16 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section aria-labelledby="about-heading" className="relative py-24 px-4 overflow-hidden">
+      {/* Background with diagonal stripes */}
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(45deg, rgba(6, 182, 212, 0.05) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(124, 58, 237, 0.05) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(6, 182, 212, 0.05) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(124, 58, 237, 0.05) 75%)
+          `,
+          backgroundSize: '60px 60px',
+          backgroundPosition: '0 0, 0 30px, 30px -30px, -30px 0px'
+        }} />
+      </div>
+      
+      {/* Glowing orbs */}
+      <div className="absolute top-10 right-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
+      
+      <div className="relative max-w-4xl mx-auto">
         <h2
           id="about-heading"
           className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"

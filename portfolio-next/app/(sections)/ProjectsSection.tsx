@@ -1,110 +1,103 @@
 'use client';
 
 /**
- * ProjectsSection - Toggle between Cover Flow and 3D Galaxy views with inline toggle
+ * ProjectsSection - Toggle between Card Showcase and Immersive 3D View
  */
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { CoverFlowViewer } from '../../components/CoverFlowViewer/CoverFlowViewer';
+import { ProjectShowcase } from '../../components/ProjectShowcase/ProjectShowcase';
 import type { CarouselItem } from '../../lib/mappers';
 
-const ProjectGalaxy = dynamic(() => import('../../components/three/ProjectGalaxy'), {
+const ProjectEnvironment = dynamic(() => import('../../components/ProjectShowcase/ProjectEnvironment'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B1120] via-[#0B1120] to-[#1a1f35] border border-[color:var(--color-border)] flex items-center justify-center">
+    <div className="w-full h-[700px] lg:h-[800px] rounded-3xl overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-        <p className="text-[color:var(--color-text-muted)] animate-pulse">Loading 3D Galaxy...</p>
+        <p className="text-white animate-pulse">Loading 3D Environment...</p>
       </div>
     </div>
   ),
 });
 
-type ViewMode = 'coverflow' | 'galaxy';
+type ViewMode = 'showcase' | 'environment';
 
 interface ProjectsSectionProps {
   items: CarouselItem[];
 }
 
 export function ProjectsSection({ items }: ProjectsSectionProps) {
-  const [mode, setMode] = useState<ViewMode>('coverflow');
+  const [mode, setMode] = useState<ViewMode>('showcase');
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Enhanced Background decoration */}
+    <section id="projects" aria-labelledby="projects-heading" className="relative py-24">
+      {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-10 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
         <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s' }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header with inline toggle */}
-        <div className="max-w-4xl mx-auto mb-16 text-center">
+        {/* Header with toggle */}
+        <div className="max-w-4xl mx-auto mb-12 text-center">
           <h2
             id="projects-heading"
-            className="text-4xl lg:text-6xl font-display font-bold mb-6 gradient-text"
+            className="text-5xl lg:text-7xl font-display font-bold mb-6 gradient-text"
           >
             Featured Projects
           </h2>
-          <p className="text-[color:var(--color-text-muted)] text-lg mb-8 max-w-2xl mx-auto">
-            Explore my AI and data science work through an interactive experience
+          <p className="text-xl text-[color:var(--color-text-muted)] max-w-2xl mx-auto mb-8">
+            Experience my work in {mode === 'showcase' ? 'an interactive card showcase' : 'an immersive 3D environment'}
           </p>
 
           {/* View Mode Toggle */}
-          <div className="inline-flex items-center gap-3 p-2 rounded-full bg-[color:var(--color-surface)]/80 backdrop-blur-md border border-[color:var(--color-border)] shadow-lg">
+          <div className="inline-flex items-center gap-3 p-2 rounded-full bg-gradient-to-r from-slate-900/90 to-purple-900/90 backdrop-blur-md border-2 border-primary/30 shadow-2xl shadow-primary/20">
             <button
-              onClick={() => setMode('coverflow')}
+              onClick={() => setMode('showcase')}
               className={`
                 px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2
-                ${mode === 'coverflow'
-                  ? 'bg-primary text-[#0B1120] shadow-lg shadow-primary/50 scale-105'
-                  : 'text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-surface)]'
+                ${mode === 'showcase'
+                  ? 'bg-gradient-to-r from-primary to-cyan-400 text-slate-900 shadow-lg shadow-primary/50 scale-105'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }
               `}
-              aria-pressed={mode === 'coverflow'}
+              aria-pressed={mode === 'showcase'}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
-              <span>Cover Flow</span>
+              <span>Card Showcase</span>
             </button>
             
             <button
-              onClick={() => setMode('galaxy')}
+              onClick={() => setMode('environment')}
               className={`
                 px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2
-                ${mode === 'galaxy'
-                  ? 'bg-primary text-[#0B1120] shadow-lg shadow-primary/50 scale-105'
-                  : 'text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-surface)]'
+                ${mode === 'environment'
+                  ? 'bg-gradient-to-r from-primary to-cyan-400 text-slate-900 shadow-lg shadow-primary/50 scale-105'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }
               `}
-              aria-pressed={mode === 'galaxy'}
+              aria-pressed={mode === 'environment'}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
               </svg>
-              <span>3D Galaxy</span>
+              <span>3D Environment</span>
             </button>
           </div>
         </div>
 
         {/* Content Area */}
         <div className="max-w-7xl mx-auto">
-          {mode === 'coverflow' ? (
-            <div key="coverflow" className="animate-fade-in">
-              <CoverFlowViewer items={items} />
-              <p className="text-center text-[color:var(--color-text-muted)] text-sm mt-8">
-                Use arrow keys or click to navigate • {items.length} projects
-              </p>
+          {mode === 'showcase' ? (
+            <div key="showcase" className="animate-fade-in">
+              <ProjectShowcase items={items} />
             </div>
           ) : (
-            <div key="galaxy" className="animate-fade-in">
-              <ProjectGalaxy />
-              <p className="text-center text-[color:var(--color-text-muted)] text-sm mt-8">
-                Drag to rotate • Scroll to zoom • Click cards to explore
-              </p>
+            <div key="environment" className="animate-fade-in">
+              <ProjectEnvironment />
             </div>
           )}
         </div>
@@ -123,6 +116,12 @@ export function ProjectsSection({ items }: ProjectsSectionProps) {
         }
         .animate-fade-in {
           animation: fade-in 0.6s ease-out;
+        }
+        .gradient-text {
+          background: linear-gradient(135deg, #06B6D4 0%, #7C3AED 50%, #EC4899 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       `}</style>
     </section>

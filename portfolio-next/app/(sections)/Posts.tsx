@@ -8,8 +8,29 @@ import Badge from '../../components/ui/Badge';
 
 export function Posts() {
   return (
-    <section aria-labelledby="posts-heading" className="py-16 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section aria-labelledby="posts-heading" className="relative py-24 px-4 overflow-hidden">
+      {/* Topography pattern background */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="topography" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+              <path d="M20 20c20 0 20 20 40 20s20-20 40-20 20 20 40 20 20-20 40-20" stroke="currentColor" strokeWidth="1" fill="none" className="text-cyan-500"/>
+              <path d="M20 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20 20-20 40-20" stroke="currentColor" strokeWidth="1" fill="none" className="text-purple-500"/>
+              <path d="M20 100c20 0 20 20 40 20s20-20 40-20 20 20 40 20 20-20 40-20" stroke="currentColor" strokeWidth="1" fill="none" className="text-pink-500"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#topography)" />
+        </svg>
+      </div>
+      
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent pointer-events-none" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-20 left-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl" />
+      <div className="absolute bottom-20 right-20 w-56 h-56 bg-purple-500/10 rounded-full blur-2xl" />
+      
+      <div className="relative max-w-4xl mx-auto">
         <h2
           id="posts-heading"
           className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8"

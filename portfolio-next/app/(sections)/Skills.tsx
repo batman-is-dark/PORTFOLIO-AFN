@@ -21,8 +21,29 @@ export function Skills() {
   ];
 
   return (
-    <section aria-labelledby="skills-heading" className="py-16 px-4 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto">
+    <section aria-labelledby="skills-heading" className="relative py-24 px-4 overflow-hidden">
+      {/* Hexagon pattern background */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 20px 20px, rgba(6, 182, 212, 0.15) 2px, transparent 0),
+            radial-gradient(circle at 60px 60px, rgba(124, 58, 237, 0.15) 2px, transparent 0)
+          `,
+          backgroundSize: '80px 80px'
+        }} />
+      </div>
+      
+      {/* Animated gradient waves */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-50" style={{
+        animation: 'shimmer 3s linear infinite',
+        backgroundSize: '200% 100%'
+      }} />
+      
+      {/* Corner accents */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-tr-full" />
+      
+      <div className="relative max-w-4xl mx-auto">
         <h2
           id="skills-heading"
           className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8"

@@ -1,10 +1,11 @@
 import '../styles/globals.css';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import type { Metadata } from 'next';
-import Header from '../components/Header';
+import TopBar from '../components/TopBar/TopBar';
 import Footer from '../components/Footer';
 import SkipLink from '../components/SkipLink';
 import { SeoJsonLd } from '../components/SeoJsonLd';
+// Note: Guided tour (react-joyride) removed — no client-only provider is loaded here.
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const grotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' });
@@ -59,8 +60,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SeoJsonLd />
       </head>
       <body className="font-sans bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
-        <SkipLink />
-        <Header />
+  <SkipLink />
+  <TopBar />
+  {/* Guided tour removed */}
         <main id="main">{children}</main>
         <Footer />
       </body>

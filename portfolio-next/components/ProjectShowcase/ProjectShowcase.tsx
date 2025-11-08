@@ -110,6 +110,7 @@ export function ProjectShowcase({ items }: ProjectShowcaseProps) {
     };
   };
 
+
   return (
     <div ref={containerRef} className="relative min-h-screen py-24 overflow-hidden">
       {/* Animated background particles */}
@@ -162,6 +163,12 @@ export function ProjectShowcase({ items }: ProjectShowcaseProps) {
                   onClick={() => {
                     setActiveIndex(index);
                     setShowProjectList(false);
+                    try {
+                      const el = document.getElementById('projects');
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } catch (e) {
+                      // noop
+                    }
                   }}
                   className={`w-full text-left p-3 rounded-xl transition-all duration-300 ${
                     activeIndex === index

@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, Float, Html, PerspectiveCamera } from '@react-three/drei';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { projects } from '../../content/projects';
 import * as THREE from 'three';
 
@@ -476,7 +476,7 @@ const projectComponents: Record<string, any> = {
   theta: AnalysisTerminal,
 };
 
-function EnvironmentScene({ onProjectClick }: { onProjectClick: (project: any) => void }) {
+function EnvironmentScene({ onProjectClick, isMobile }: { onProjectClick: (project: any) => void; isMobile: boolean }) {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
 
@@ -485,8 +485,14 @@ function EnvironmentScene({ onProjectClick }: { onProjectClick: (project: any) =
     onProjectClick(project);
   };
 
-  // Position projects on desks/shelves in the office
-  const projectPositions: Record<number, [number, number, number]> = {
+  // Simplified positions for mobile - fewer objects, closer together
+  const projectPositions: Record<number, [number, number, number]> = isMobile ? {
+    0: [-3, 2, -4],    // Closer desk 1
+    1: [3, 2, -4],     // Closer desk 2
+    2: [0, 2, -6],     // Center desk
+    3: [-3, 2, 4],     // Back desk left
+    4: [3, 2, 4],      // Back desk right
+  } : {
     0: [-4, 2, -6],    // On desk 1
     1: [4, 2, -6],     // On desk 2
     2: [-8, 1.5, 0],   // On bookshelf
@@ -497,94 +503,113 @@ function EnvironmentScene({ onProjectClick }: { onProjectClick: (project: any) =
     7: [0, 1.5, -10],  // Far wall
   };
 
+  // Limit projects on mobile
+  const displayedProjects = isMobile ? projects.slice(0, 5) : projects;
+
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 5, 12]} fov={60} />
-      <OrbitControls 
+      <PerspectiveCamera makeDefault position={isMobile ? [0, 4, 8] : [0, 5, 12]} fov={isMobile ? 70 : 60} />
+      <OrbitControls
         enablePan={true}
-        minDistance={5}
-        maxDistance={20}
+        minDistance={isMobile ? 3 : 5}
+        maxDistance={isMobile ? 12 : 20}
         maxPolarAngle={Math.PI / 2.2}
         target={[0, 2, 0]}
+        enableDamping={true}
+        dampingFactor={isMobile ? 0.1 : 0.05}
+        rotateSpeed={isMobile ? 0.8 : 1}
+        panSpeed={isMobile ? 0.8 : 1}
       />
-      
-      {/* Lighting - office-style */}
-      <ambientLight intensity={0.6} />
-      <pointLight position={[0, 8, 0]} intensity={1.5} castShadow color="#ffffff" />
-      <pointLight position={[-8, 6, -8]} intensity={0.8} color="#fbbf24" />
-      <pointLight position={[8, 6, -8]} intensity={0.8} color="#3b82f6" />
-      <spotLight
-        position={[0, 10, 0]}
-        angle={0.8}
-        penumbra={1}
-        intensity={1}
-        castShadow
-      />
-      
+
+      {/* Lighting - simplified for mobile */}
+      <ambientLight intensity={isMobile ? 0.8 : 0.6} />
+      <pointLight position={[0, 8, 0]} intensity={isMobile ? 1 : 1.5} castShadow={!isMobile} color="#ffffff" />
+      {!isMobile && (
+        <>
+          <pointLight position={[-8, 6, -8]} intensity={0.8} color="#fbbf24" />
+          <pointLight position={[8, 6, -8]} intensity={0.8} color="#3b82f6" />
+          <spotLight
+            position={[0, 10, 0]}
+            angle={0.8}
+            penumbra={1}
+            intensity={1}
+            castShadow
+          />
+        </>
+      )}
+
       {/* Environment */}
       <Environment preset="apartment" />
-      
+
       {/* Floor */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
-        <planeGeometry args={[40, 40]} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow={!isMobile}>
+        <planeGeometry args={[isMobile ? 30 : 40, isMobile ? 30 : 40]} />
         <meshStandardMaterial color="#2d3748" roughness={0.8} />
       </mesh>
-      
-      {/* Walls */}
-      {/* Back wall */}
-      <mesh position={[0, 5, -12]} receiveShadow>
-        <boxGeometry args={[40, 10, 0.2]} />
-        <meshStandardMaterial color="#374151" />
-      </mesh>
-      
-      {/* Left wall */}
-      <mesh position={[-12, 5, 0]} rotation={[0, Math.PI / 2, 0]} receiveShadow>
-        <boxGeometry args={[40, 10, 0.2]} />
-        <meshStandardMaterial color="#374151" />
-      </mesh>
-      
-      {/* Right wall */}
-      <mesh position={[12, 5, 0]} rotation={[0, -Math.PI / 2, 0]} receiveShadow>
-        <boxGeometry args={[40, 10, 0.2]} />
-        <meshStandardMaterial color="#374151" />
-      </mesh>
-      
-      {/* Office Furniture */}
+
+      {/* Walls - simplified for mobile */}
+      {!isMobile && (
+        <>
+          {/* Back wall */}
+          <mesh position={[0, 5, -12]} receiveShadow>
+            <boxGeometry args={[40, 10, 0.2]} />
+            <meshStandardMaterial color="#374151" />
+          </mesh>
+
+          {/* Left wall */}
+          <mesh position={[-12, 5, 0]} rotation={[0, Math.PI / 2, 0]} receiveShadow>
+            <boxGeometry args={[40, 10, 0.2]} />
+            <meshStandardMaterial color="#374151" />
+          </mesh>
+
+          {/* Right wall */}
+          <mesh position={[12, 5, 0]} rotation={[0, -Math.PI / 2, 0]} receiveShadow>
+            <boxGeometry args={[40, 10, 0.2]} />
+            <meshStandardMaterial color="#374151" />
+          </mesh>
+        </>
+      )}
+
+      {/* Office Furniture - simplified for mobile */}
       {/* Front desks */}
       <Desk position={[-4, 0, -6]} rotation={[0, 0, 0]} />
       <Chair position={[-4, 0, -4.5]} rotation={[0, Math.PI, 0]} />
       <Monitor position={[-4, 0.8, -6.5]} rotation={[0, 0, 0]} />
-      <CoffeeMug position={[-3, 0.8, -5.5]} />
-      
+      {!isMobile && <CoffeeMug position={[-3, 0.8, -5.5]} />}
+
       <Desk position={[4, 0, -6]} rotation={[0, 0, 0]} />
       <Chair position={[4, 0, -4.5]} rotation={[0, Math.PI, 0]} />
       <Monitor position={[4, 0.8, -6.5]} rotation={[0, 0, 0]} />
-      
+
       {/* Center desk */}
       <Desk position={[0, 0, -8]} rotation={[0, 0, 0]} />
       <Chair position={[0, 0, -6.5]} rotation={[0, Math.PI, 0]} />
-      
-      {/* Back desks */}
-      <Desk position={[-4, 0, 6]} rotation={[0, Math.PI, 0]} />
-      <Chair position={[-4, 0, 4.5]} rotation={[0, 0, 0]} />
-      
-      <Desk position={[4, 0, 6]} rotation={[0, Math.PI, 0]} />
-      <Chair position={[4, 0, 4.5]} rotation={[0, 0, 0]} />
-      
-      {/* Bookshelves */}
-      <Bookshelf position={[-8, 0, 0]} rotation={[0, Math.PI / 2, 0]} />
-      <Bookshelf position={[8, 0, 0]} rotation={[0, -Math.PI / 2, 0]} />
-      
-      {/* Plants for decoration */}
-      <Plant position={[-10, 0, -10]} />
-      <Plant position={[10, 0, -10]} />
-      <Plant position={[0, 0, 10]} />
-      
+
+      {/* Back desks - only on desktop */}
+      {!isMobile && (
+        <>
+          <Desk position={[-4, 0, 6]} rotation={[0, Math.PI, 0]} />
+          <Chair position={[-4, 0, 4.5]} rotation={[0, 0, 0]} />
+
+          <Desk position={[4, 0, 6]} rotation={[0, Math.PI, 0]} />
+          <Chair position={[4, 0, 4.5]} rotation={[0, 0, 0]} />
+
+          {/* Bookshelves */}
+          <Bookshelf position={[-8, 0, 0]} rotation={[0, Math.PI / 2, 0]} />
+          <Bookshelf position={[8, 0, 0]} rotation={[0, -Math.PI / 2, 0]} />
+
+          {/* Plants for decoration */}
+          <Plant position={[-10, 0, -10]} />
+          <Plant position={[10, 0, -10]} />
+          <Plant position={[0, 0, 10]} />
+        </>
+      )}
+
       {/* Render interactive project objects */}
-      {projects.map((project, index) => {
+      {displayedProjects.map((project, index) => {
         const Component = projectComponents[project.slug] || DataCube;
         const position = projectPositions[index] || [0, 2, 0];
-        
+
         return (
           <Component
             key={project.slug}
@@ -611,6 +636,17 @@ function EnvironmentScene({ onProjectClick }: { onProjectClick: (project: any) =
 export default function ProjectEnvironment() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleProjectClick = (project: any) => {
     setSelectedProject(project);
@@ -619,72 +655,81 @@ export default function ProjectEnvironment() {
 
   return (
     <div className="relative w-full h-screen bg-slate-950">
-      <Canvas shadows gl={{ antialias: true }}>
-        <EnvironmentScene onProjectClick={handleProjectClick} />
+      <Canvas
+        shadows={!isMobile}
+        gl={{
+          antialias: !isMobile,
+          powerPreference: isMobile ? "low-power" : "high-performance",
+          alpha: true
+        }}
+        dpr={isMobile ? 1 : [1, 2]}
+        style={{ touchAction: isMobile ? 'pan-y' : 'auto' }}
+      >
+        <EnvironmentScene onProjectClick={handleProjectClick} isMobile={isMobile} />
       </Canvas>
-      
-      {/* Instructions overlay */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full border border-slate-700">
-        <p className="text-white text-sm font-medium">
-          🖱️ Hover over glowing objects • Click to view details • Drag to look around
+
+      {/* Instructions overlay - mobile optimized */}
+      <div className={`absolute top-8 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm px-4 md:px-6 py-2 md:py-3 rounded-full border border-slate-700 text-center ${isMobile ? 'text-xs' : 'text-sm'}`}>
+        <p className="text-white font-medium">
+          {isMobile ? '� Tap objects • Drag to look' : '�🖱️ Hover over glowing objects • Click to view details • Drag to look around'}
         </p>
       </div>
-      
-      {/* Project details panel */}
+
+      {/* Project details panel - mobile optimized */}
       {showDetails && selectedProject && (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-11/12 max-w-2xl bg-slate-900/95 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl animate-in slide-in-from-bottom duration-500">
+        <div className={`absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-11/12 max-w-2xl bg-slate-900/95 backdrop-blur-md p-4 md:p-8 rounded-2xl border border-slate-700 shadow-2xl animate-in slide-in-from-bottom duration-500 ${isMobile ? 'max-h-[70vh] overflow-y-auto' : ''}`}>
           <button
             onClick={() => setShowDetails(false)}
-            className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+            className="absolute top-2 right-2 md:top-4 md:right-4 text-slate-400 hover:text-white transition-colors"
             aria-label="Close details"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          
-          <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
-          <p className="text-lg text-blue-400 mb-4">{selectedProject.role} • {selectedProject.timeframe}</p>
-          
-          <div className="space-y-4 text-slate-300">
+
+          <h2 className={`font-bold text-white mb-2 ${isMobile ? 'text-xl' : 'text-3xl'}`}>{selectedProject.title}</h2>
+          <p className={`text-blue-400 mb-4 ${isMobile ? 'text-sm' : 'text-lg'}`}>{selectedProject.role} • {selectedProject.timeframe}</p>
+
+          <div className="space-y-3 md:space-y-4 text-slate-300">
             <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Problem</h3>
-              <p className="text-base">{selectedProject.problem}</p>
+              <h3 className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Problem</h3>
+              <p className={`text-sm md:text-base ${isMobile ? 'leading-relaxed' : ''}`}>{selectedProject.problem}</p>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Approach</h3>
-              <p className="text-base">{selectedProject.approach}</p>
+              <h3 className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Approach</h3>
+              <p className={`text-sm md:text-base ${isMobile ? 'leading-relaxed' : ''}`}>{selectedProject.approach}</p>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Impact</h3>
-              <p className="text-base">{selectedProject.impact}</p>
+              <h3 className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Impact</h3>
+              <p className={`text-sm md:text-base ${isMobile ? 'leading-relaxed' : ''}`}>{selectedProject.impact}</p>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Tech Stack</h3>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Tech Stack</h3>
+              <div className="flex flex-wrap gap-1 md:gap-2">
                 {selectedProject.stack.map((tech: string) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm text-blue-300"
+                    className={`px-2 md:px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 ${isMobile ? 'text-xs' : 'text-sm'}`}
                   >
                     {tech}
                   </span>
                 ))}
               </div>
             </div>
-            
+
             {selectedProject.links && selectedProject.links.length > 0 && (
-              <div className="pt-4 flex gap-4">
+              <div className="pt-2 md:pt-4 flex gap-2 md:gap-4">
                 {selectedProject.links.map((link: any) => (
                   <a
                     key={link.url}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                    className={`px-3 md:px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors ${isMobile ? 'text-sm' : ''}`}
                   >
                     {link.label}
                   </a>

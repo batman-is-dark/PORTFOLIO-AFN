@@ -8,6 +8,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Button from '../../components/ui/Button';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const Hero3DBackground = dynamic(() => import('../../components/three/Hero3DBackground'), { ssr: false });
 
 export function HeroClient() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -26,6 +29,8 @@ export function HeroClient() {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-[80vh] text-center px-4 overflow-hidden">
+      {/* 3D immersive background */}
+      <Hero3DBackground />
       {/* Animated gradient background */}
       <motion.div
         className="absolute inset-0 opacity-30"

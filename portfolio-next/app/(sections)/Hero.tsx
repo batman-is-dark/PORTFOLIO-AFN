@@ -6,7 +6,7 @@ import { HeroClient } from './HeroClient';
 
 export function Hero() {
   return (
-    <section aria-label="Hero section">
+    <section id="hero-section" aria-label="Hero section">
       <HeroClient />
     </section>
   );

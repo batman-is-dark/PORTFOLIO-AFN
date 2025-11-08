@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function TopBar({ accent }: { accent?: string }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,7 +48,7 @@ export default function TopBar({ accent }: { accent?: string }) {
     >
       <div className="flex items-center gap-3">
         <Link href="/" className="flex items-center gap-3">
-          <img src="/logo.svg" alt="logo" width={36} height={36} className="block" />
+          <Image src="/logo.svg" alt="logo" width={36} height={36} className="block" />
           <span className="text-white font-bold select-none">Your Name</span>
         </Link>
       </div>

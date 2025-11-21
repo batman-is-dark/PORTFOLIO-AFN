@@ -18,7 +18,7 @@ export function Contact() {
           `
         }} />
       </div>
-      
+
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
@@ -34,7 +34,7 @@ export function Contact() {
           />
         ))}
       </div>
-      
+
       <div className="relative max-w-4xl mx-auto text-center">
         <h2
           id="contact-heading"
@@ -42,38 +42,36 @@ export function Contact() {
         >
           Get In Touch
         </h2>
-        
+
         <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
           I&apos;m always open to discussing new projects, research opportunities, or collaborations.
-          Feel free to reach out through email or connect with me on LinkedIn and GitHub.
+          Feel free to reach out through email or connect with me on GitHub.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             as="a"
-            href="mailto:contact@example.com"
+            href="mailto:afnusha.r@gmail.com"
             variant="primary"
             size="lg"
             aria-label="Send email"
           >
             Email Me
           </Button>
-          
+
           <Button
             as="a"
-            href="https://linkedin.com/in/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="tel:+971558085931"
             variant="secondary"
             size="lg"
-            aria-label="Visit LinkedIn profile (opens in new tab)"
+            aria-label="Call me"
           >
-            LinkedIn
+            Call Me
           </Button>
-          
+
           <Button
             as="a"
-            href="https://github.com/yourusername"
+            href="https://github.com/batman-is-dark"
             target="_blank"
             rel="noopener noreferrer"
             variant="ghost"

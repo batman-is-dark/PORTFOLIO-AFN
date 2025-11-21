@@ -1,16 +1,11 @@
 import type { Project } from '../../types/content';
 import { ProjectSchema } from '../../types/content';
 
-import alpha from './alpha';
-import beta from './beta';
-import gamma from './gamma';
-import delta from './delta';
-import epsilon from './epsilon';
-import zeta from './zeta';
-import eta from './eta';
-import theta from './theta';
+import skinDisease from './skin-disease';
+import environmentalAnalysis from './environmental-analysis';
+import robotFish from './robot-fish';
 
-const raw = [alpha, beta, gamma, delta, epsilon, zeta, eta, theta] as const;
+const raw = [skinDisease, environmentalAnalysis, robotFish] as const;
 
 export const projects: Project[] = raw.map((p) => {
   try {

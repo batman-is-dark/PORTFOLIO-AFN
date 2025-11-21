@@ -4,7 +4,8 @@ import { Hero } from './(sections)/Hero';
 import { ProjectsSection } from './(sections)/ProjectsSection';
 import { About } from './(sections)/About';
 import { Skills } from './(sections)/Skills';
-import { Posts } from './(sections)/Posts';
+import { Academic } from './(sections)/Academic';
+import { Achievements } from './(sections)/Achievements';
 import { Contact } from './(sections)/Contact';
 
 export default function HomePage() {
@@ -13,10 +14,11 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
-      <ProjectsSection items={carouselItems} />
       <About />
+      <Academic />
       <Skills />
-      <Posts />
+      <ProjectsSection items={carouselItems} />
+      <Achievements />
       <Contact />
     </main>
   );

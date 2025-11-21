@@ -8,16 +8,20 @@ export function Skills() {
   const skillCategories = [
     {
       title: 'Languages',
-      skills: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'R', 'C++'],
+      skills: ['Python', 'C++', 'SQL', 'HTML', 'JavaScript', 'Arabic', 'English'],
     },
     {
-      title: 'ML/AI Frameworks',
-      skills: ['PyTorch', 'TensorFlow', 'scikit-learn', 'Hugging Face', 'OpenCV', 'spaCy'],
+      title: 'AI & Machine Learning',
+      skills: ['TensorFlow', 'Keras', 'Scikit-Learn', 'NLTK', 'Pandas', 'NumPy', 'OpenCV'],
     },
     {
-      title: 'Tools & Technologies',
-      skills: ['Git', 'Docker', 'Jupyter', 'NumPy', 'Pandas', 'React', 'Next.js', 'Node.js'],
+      title: 'Tools & Platforms',
+      skills: ['Git', 'Docker', 'Power BI', 'Streamlit', 'Arduino', 'Robotics', 'IBM Data Science'],
     },
+    {
+      title: 'Core Competencies',
+      skills: ['Data Analysis', 'Deductive Reasoning', 'Circuit Design', 'Scientific Computing'],
+    }
   ];
 
   return (
@@ -32,17 +36,17 @@ export function Skills() {
           backgroundSize: '80px 80px'
         }} />
       </div>
-      
+
       {/* Animated gradient waves */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-50" style={{
         animation: 'shimmer 3s linear infinite',
         backgroundSize: '200% 100%'
       }} />
-      
+
       {/* Corner accents */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-tr-full" />
-      
+
       <div className="relative max-w-4xl mx-auto">
         <h2
           id="skills-heading"

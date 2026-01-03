@@ -1,11 +1,19 @@
 import type { Project } from '../../types/content';
 import { ProjectSchema } from '../../types/content';
 
-import skinDisease from './skin-disease';
-import environmentalAnalysis from './environmental-analysis';
-import robotFish from './robot-fish';
+import { creditMateProject } from './credit-mate';
+import { poliseeProject } from './polisee';
+import { resilienceAIProject } from './resilience-ai';
+import { digiAddictProject } from './digi-addict';
+import { misinformationSimulatorProject } from './misinformation-simulator';
 
-const raw = [skinDisease, environmentalAnalysis, robotFish] as const;
+const raw = [
+  creditMateProject,
+  poliseeProject,
+  resilienceAIProject,
+  digiAddictProject,
+  misinformationSimulatorProject
+] as const;
 
 export const projects: Project[] = raw.map((p) => {
   try {
@@ -15,7 +23,7 @@ export const projects: Project[] = raw.map((p) => {
       console.error('[content] Project schema validation failed for', p.slug, err);
     }
   }
-  return p;
+  return p as Project;
 });
 
 export function getProjectBySlug(slug: string): Project | undefined {

@@ -57,13 +57,13 @@ export function Skills() {
 
         <div className="space-y-6">
           {skillCategories.map((category) => (
-            <div key={category.title}>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            <div key={category.title} className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-xl hover:bg-white/10 transition-colors">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-white/10 pb-2">
                 {category.title}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
-                  <Badge key={skill} variant="default">
+                  <Badge key={skill} variant="glow">
                     {skill}
                   </Badge>
                 ))}

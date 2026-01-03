@@ -49,7 +49,7 @@ export default function TopBar({ accent }: { accent?: string }) {
       <div className="flex items-center gap-3">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.svg" alt="logo" width={36} height={36} className="block" />
-          <span className="text-white font-bold select-none">Your Name</span>
+          <span className="text-white font-bold select-none">AFNAN K.A RAFI</span>
         </Link>
       </div>
 
@@ -60,7 +60,7 @@ export default function TopBar({ accent }: { accent?: string }) {
       </nav>
 
       <div className="flex items-center gap-3">
-        <a href="/resume.pdf" className="topbar-cta inline-flex items-center gap-2 px-4 py-2 rounded-full font-semibold">
+        <a href="/resume.docx" download="Afnan_CV.docx" className="topbar-cta inline-flex items-center gap-2 px-4 py-2 rounded-full font-semibold">
           Resume
         </a>
         <button className="md:hidden text-white/80">

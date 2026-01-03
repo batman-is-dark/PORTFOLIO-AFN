@@ -12,10 +12,13 @@ import type { CarouselItem } from '../types/ui';
 export function toCarouselItem(p: Project): CarouselItem {
   return {
     id: p.slug,
+    slug: p.slug,
     title: p.title,
     role: p.role,
+    timeframe: p.timeframe,
     stack: p.stack,
+    summary: p.outcomes,
     description: p.outcomes,
-    image: p.reel?.poster,
+    image: p.three?.fallbackImage ?? p.reel?.poster,
   };
 }

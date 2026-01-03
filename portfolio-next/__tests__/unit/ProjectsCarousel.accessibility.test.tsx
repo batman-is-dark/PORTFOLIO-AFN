@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ProjectsCarousel } from '../../components/ProjectsCarousel/ProjectsCarousel';
-import type { CarouselItem } from '../../lib/mappers';
+import type { CarouselItem } from '../../types/ui';
 
 // Mock embla-carousel-react
 vi.mock('embla-carousel-react', () => ({

@@ -10,7 +10,7 @@ import { OrbitControls, PerspectiveCamera, Text, Float, Html, Stars, Environment
 import { useRef, useState, useMemo } from 'react';
 import * as THREE from 'three';
 import Link from 'next/link';
-import type { CarouselItem } from '../../lib/mappers';
+import type { CarouselItem } from '../../types/ui';
 
 interface Project3DCardProps {
   item: CarouselItem;

@@ -8,7 +8,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Link from 'next/link';
-import type { CarouselItem } from '../../lib/mappers';
+import type { CarouselItem } from '../../types/ui';
 
 export interface ProjectsCarouselProps {
   items: CarouselItem[];

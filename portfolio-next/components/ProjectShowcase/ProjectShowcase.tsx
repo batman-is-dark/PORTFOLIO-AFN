@@ -7,7 +7,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import type { CarouselItem } from '../../lib/mappers';
+import type { CarouselItem } from '../../types/ui';
 
 interface ProjectShowcaseProps {
   items: CarouselItem[];

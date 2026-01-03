@@ -1,5 +1,4 @@
 import { projects } from '../content/projects';
-import { toCarouselItem } from '../lib/mappers';
 import { Hero } from './(sections)/Hero';
 import { ProjectsSection } from './(sections)/ProjectsSection';
 import { About } from './(sections)/About';

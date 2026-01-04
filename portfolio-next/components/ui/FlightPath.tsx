@@ -13,21 +13,21 @@ const Airplane = () => {
     <div className="absolute z-50 pointer-events-none" style={{ opacity: 1 }}>
       <div className="relative" style={{ opacity: 1 }}>
         {/* Strong glow background */}
-        <div className="absolute inset-0 w-40 h-40 -translate-x-1/2 -translate-y-1/2 bg-yellow-400 rounded-full blur-3xl" style={{ opacity: 1 }} />
-        <div className="absolute inset-0 w-24 h-24 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full blur-2xl" style={{ opacity: 1 }} />
+        <div className="absolute inset-0 w-40 h-40 -translate-x-1/2 -translate-y-1/2 bg-[#FF3300] rounded-full blur-3xl" style={{ opacity: 0.4 }} />
+        <div className="absolute inset-0 w-24 h-24 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full blur-2xl" style={{ opacity: 0.6 }} />
         <svg
           width="160"
           height="160"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           className="relative"
-          style={{ opacity: 1, filter: 'brightness(5) drop-shadow(0 0 30px #ffffff) drop-shadow(0 0 60px #fbbf24)' }}
+          style={{ opacity: 1, filter: 'brightness(2) drop-shadow(0 0 20px #FF3300)' }}
         >
           <path
             d="M21 16.5L13 11V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V11L2 16.5V19L10 16.5V21L8 22.5V24L11.5 23L15 24V22.5L13 21V16.5L21 19V16.5Z"
             fill="#ffffff"
-            stroke="#fbbf24"
-            strokeWidth="2"
+            stroke="#FF3300"
+            strokeWidth="1"
             style={{ opacity: 1 }}
           />
         </svg>

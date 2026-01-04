@@ -8,20 +8,32 @@ import { projects } from '../../content/projects';
 
 export function ProjectsSection() {
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="relative bg-gray-950 overflow-hidden">
-      <div className="relative w-full max-w-[1400px] mx-auto px-4 pt-24 mb-12 z-20">
-        <h2
-          id="projects-heading"
-          className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight"
-        >
-          Featured Projects
-        </h2>
-        <p className="text-gray-400 max-w-2xl text-lg">
-          Navigating the strategic landscape of AI, Robotics, and Software Engineering.
-          <span className="block mt-2 text-cyan-500 text-sm font-mono uppercase tracking-widest">
-            [SCROLL TO INITIATE DEPLOYMENT FLIGHT]
-          </span>
-        </p>
+    <section id="projects" aria-labelledby="projects-heading" className="relative bg-bg overflow-hidden border-t border-white/5">
+      <div className="relative w-full max-w-7xl mx-auto px-6 pt-32 mb-12 z-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="space-y-4">
+            <span className="text-accent font-sans text-xs uppercase tracking-[0.4em] block">
+              Portfolio
+            </span>
+            <h2
+              id="projects-heading"
+              className="text-6xl md:text-8xl font-display font-bold text-primary tracking-tighter"
+            >
+              Selected<br />Works
+            </h2>
+          </div>
+          <div className="max-w-md">
+            <p className="text-secondary text-lg font-sans leading-relaxed">
+              A collection of projects exploring the intersection of AI, Robotics, and human-centric design.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="h-[1px] w-12 bg-accent"></div>
+              <span className="text-accent text-[10px] font-sans uppercase tracking-[0.3em]">
+                Scroll to navigate
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Flight Animation Container */}

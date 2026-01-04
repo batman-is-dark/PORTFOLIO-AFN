@@ -38,26 +38,26 @@ export default function Hero3DBackground() {
           fade
           speed={isMobile ? 0.5 : 1}
         />
-        {/* Floating orbs - reduced on mobile */}
-        <Float speed={isMobile ? 1 : 2} rotationIntensity={0.2} floatIntensity={0.5}>
-          <mesh position={[-2, 1, 0]}>
-            <sphereGeometry args={[0.7, isMobile ? 16 : 32, isMobile ? 16 : 32]} />
+        {/* Floating geometric elements - Brutalist style */}
+        <Float speed={isMobile ? 1 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
+          <mesh position={[-3, 1, -2]} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
+            <boxGeometry args={[0.8, 0.8, 0.8]} />
             <meshStandardMaterial
-              color="#06B6D4"
-              emissive="#06B6D4"
-              emissiveIntensity={isMobile ? 0.2 : 0.3}
+              color="#FF3300"
+              emissive="#FF3300"
+              emissiveIntensity={isMobile ? 0.3 : 0.5}
               transparent
-              opacity={0.7}
+              opacity={0.8}
             />
           </mesh>
         </Float>
-        <Float speed={isMobile ? 0.8 : 1.5} rotationIntensity={0.3} floatIntensity={0.7}>
-          <mesh position={[2, -1, 0]}>
-            <sphereGeometry args={[0.5, isMobile ? 16 : 32, isMobile ? 16 : 32]} />
+        <Float speed={isMobile ? 0.8 : 1.5} rotationIntensity={0.8} floatIntensity={0.7}>
+          <mesh position={[3, -1, -1]} rotation={[0, Math.PI / 3, Math.PI / 6]}>
+            <tetrahedronGeometry args={[0.6]} />
             <meshStandardMaterial
-              color="#7C3AED"
-              emissive="#7C3AED"
-              emissiveIntensity={isMobile ? 0.2 : 0.3}
+              color="#F8FAFC"
+              emissive="#F8FAFC"
+              emissiveIntensity={isMobile ? 0.2 : 0.4}
               transparent
               opacity={0.6}
             />
@@ -65,14 +65,14 @@ export default function Hero3DBackground() {
         </Float>
         {!isMobile && (
           <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
-            <mesh position={[0, 2, -1]}>
-              <sphereGeometry args={[0.4, 32, 32]} />
+            <mesh position={[0, 2, -3]} rotation={[Math.PI / 6, 0, Math.PI / 4]}>
+              <octahedronGeometry args={[0.5]} />
               <meshStandardMaterial
-                color="#D6C3A5"
-                emissive="#D6C3A5"
-                emissiveIntensity={0.2}
+                color="#94A3B8"
+                emissive="#0B1221"
+                emissiveIntensity={0.5}
                 transparent
-                opacity={0.5}
+                opacity={0.4}
               />
             </mesh>
           </Float>

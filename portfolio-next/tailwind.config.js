@@ -9,19 +9,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#0B1120',
-        surface: '#111827',
-        primary: '#06B6D4',
-        secondary: '#7C3AED',
-        accent: '#D6C3A5',
+        bg: '#0B1221', // Deep Midnight Navy
+        surface: '#151B28',
+        primary: '#F8FAFC',
+        secondary: '#94A3B8',
+        accent: '#FF3300',
         text: {
-          primary: '#E5E7EB',
-          secondary: '#94A3B8',
+          primary: '#F1F5F9',
+          secondary: '#64748B',
         },
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Space Grotesk', 'ui-sans-serif', 'system-ui'],
-        sans: ['var(--font-sans)', 'Inter', 'ui-sans-serif', 'system-ui'],
+        display: ['var(--font-display)', 'serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
       },
     },
   },

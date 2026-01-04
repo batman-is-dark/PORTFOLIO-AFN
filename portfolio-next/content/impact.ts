@@ -27,7 +27,7 @@ export const impactRoles: ImpactRole[] = [
     ],
     category: 'Leadership',
     coordinates: [-10, 5, -10], // Top Left
-    color: '#06b6d4' // Cyan
+    color: '#FF3300' // International Orange
   },
   {
     id: 'magazine-editor',
@@ -41,7 +41,7 @@ export const impactRoles: ImpactRole[] = [
     ],
     category: 'Editorial',
     coordinates: [-5, 2.5, -5], // Mid-Left
-    color: '#ec4899' // Pink
+    color: '#A1A1AA' // Zinc
   },
   {
     id: 'arduino-programmer',
@@ -55,7 +55,7 @@ export const impactRoles: ImpactRole[] = [
     ],
     category: 'Technical',
     coordinates: [0, 0, 0], // Center
-    color: '#f59e0b' // Amber
+    color: '#FFFFFF' // White
   },
   {
     id: 'sciscape-volunteer',
@@ -69,7 +69,7 @@ export const impactRoles: ImpactRole[] = [
     ],
     category: 'Community',
     coordinates: [5, -2.5, 5], // Mid-Right
-    color: '#22c55e' // Green
+    color: '#71717A' // Zinc
   },
   {
     id: 'class-monitor',
@@ -83,6 +83,6 @@ export const impactRoles: ImpactRole[] = [
     ],
     category: 'Leadership',
     coordinates: [10, -5, 10], // Bottom Right
-    color: '#7c3aed' // Violet
+    color: '#FF3300' // International Orange
   }
 ];

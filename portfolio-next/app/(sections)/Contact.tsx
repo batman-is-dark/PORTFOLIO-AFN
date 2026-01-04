@@ -6,80 +6,59 @@ import Button from '../../components/ui/Button';
 
 export function Contact() {
   return (
-    <section aria-labelledby="contact-heading" className="relative py-24 px-4 overflow-hidden">
-      {/* Mesh gradient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-pink-500/5" />
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            radial-gradient(circle at 30% 30%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 60%)
-          `
-        }} />
-      </div>
+    <section id="contact" aria-labelledby="contact-heading" className="relative py-40 px-6 bg-bg border-t border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-24">
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <span className="text-accent font-sans text-xs tracking-[0.5em] uppercase block">
+                Contact
+              </span>
+              <h2
+                id="contact-heading"
+                className="text-7xl md:text-9xl font-display font-bold text-primary tracking-tighter"
+              >
+                Let&apos;s Talk.
+              </h2>
+            </div>
 
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+            <p className="text-2xl text-secondary font-sans leading-relaxed max-w-lg">
+              I&apos;m always open to discussing new projects, research opportunities, or collaborations.
+            </p>
 
-      <div className="relative max-w-4xl mx-auto text-center">
-        <h2
-          id="contact-heading"
-          className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
-        >
-          Get In Touch
-        </h2>
+            <div className="space-y-8 pt-8">
+              <div className="group">
+                <span className="text-accent font-sans text-[10px] font-bold uppercase tracking-[0.3em] block mb-2">Email</span>
+                <a href="mailto:afnusha.r@gmail.com" className="text-primary text-3xl md:text-4xl font-display font-bold hover:text-accent transition-colors">
+                  afnusha.r@gmail.com
+                </a>
+              </div>
+              <div className="group">
+                <span className="text-accent font-sans text-[10px] font-bold uppercase tracking-[0.3em] block mb-2">Phone</span>
+                <a href="tel:+971558085931" className="text-primary text-3xl md:text-4xl font-display font-bold hover:text-accent transition-colors">
+                  +971 55 808 5931
+                </a>
+              </div>
+            </div>
+          </div>
 
-        <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          I&apos;m always open to discussing new projects, research opportunities, or collaborations.
-          Feel free to reach out through email or connect with me on GitHub.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button
-            as="a"
-            href="mailto:afnusha.r@gmail.com"
-            variant="primary"
-            size="lg"
-            aria-label="Send email"
-          >
-            Email Me
-          </Button>
-
-          <Button
-            as="a"
-            href="tel:+971558085931"
-            variant="secondary"
-            size="lg"
-            aria-label="Call me"
-          >
-            Call Me
-          </Button>
-
-          <Button
-            as="a"
-            href="https://github.com/batman-is-dark"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="ghost"
-            size="lg"
-            aria-label="Visit GitHub profile (opens in new tab)"
-          >
-            GitHub
-          </Button>
+          <div className="flex flex-col justify-center">
+            <div className="p-12 border border-white/10 relative group hover:border-accent transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-4">
+                <div className="w-2 h-2 bg-accent animate-pulse"></div>
+              </div>
+              <h3 className="text-3xl font-display font-bold text-primary mb-6 italic">Current Status</h3>
+              <p className="text-secondary font-sans text-lg leading-relaxed mb-10">
+                Currently based in Dubai, UAE. Specializing in AI and Robotics. Available for remote collaboration worldwide.
+              </p>
+              <a
+                href="mailto:afnusha.r@gmail.com"
+                className="inline-flex items-center justify-center w-full py-6 bg-primary text-bg text-center font-sans font-bold uppercase tracking-[0.2em] hover:bg-accent hover:text-white transition-all duration-300"
+              >
+                Send Message
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

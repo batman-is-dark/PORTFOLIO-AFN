@@ -25,47 +25,40 @@ export function Skills() {
   ];
 
   return (
-    <section aria-labelledby="skills-heading" className="relative py-24 px-4 overflow-hidden">
-      {/* Hexagon pattern background */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            radial-gradient(circle at 20px 20px, rgba(6, 182, 212, 0.15) 2px, transparent 0),
-            radial-gradient(circle at 60px 60px, rgba(124, 58, 237, 0.15) 2px, transparent 0)
-          `,
-          backgroundSize: '80px 80px'
-        }} />
-      </div>
+    <section id="skills" aria-labelledby="skills-heading" className="relative py-40 px-6 overflow-hidden bg-bg border-t border-white/5">
+      <div className="relative max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
+          <div className="space-y-6">
+            <span className="text-accent font-sans text-xs tracking-[0.5em] uppercase block">
+              Technical Stack
+            </span>
+            <h2
+              id="skills-heading"
+              className="text-6xl md:text-8xl font-display font-bold text-primary tracking-tighter"
+            >
+              Expertise
+            </h2>
+          </div>
+          <p className="text-secondary max-w-md font-sans text-xl leading-relaxed">
+            A comprehensive toolkit developed through rigorous academic study and hands-on project engineering.
+          </p>
+        </div>
 
-      {/* Animated gradient waves */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-50" style={{
-        animation: 'shimmer 3s linear infinite',
-        backgroundSize: '200% 100%'
-      }} />
-
-      {/* Corner accents */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-tr-full" />
-
-      <div className="relative max-w-4xl mx-auto">
-        <h2
-          id="skills-heading"
-          className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8"
-        >
-          Skills & Technologies
-        </h2>
-
-        <div className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
           {skillCategories.map((category) => (
-            <div key={category.title} className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-xl hover:bg-white/10 transition-colors">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-white/10 pb-2">
+            <div key={category.title} className="bg-bg p-12 hover:bg-surface transition-all duration-500 group relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-0 bg-accent group-hover:h-full transition-all duration-500"></div>
+              <h3 className="text-[10px] font-sans font-bold text-accent uppercase tracking-[0.4em] mb-10 flex items-center gap-4">
                 {category.title}
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-4">
                 {category.skills.map((skill) => (
-                  <Badge key={skill} variant="glow">
+                  <span 
+                    key={skill} 
+                    className="px-5 py-2.5 bg-surface border border-white/5 text-primary font-sans text-xs uppercase tracking-widest hover:border-accent hover:text-accent transition-all cursor-default"
+                  >
                     {skill}
-                  </Badge>
+                  </span>
                 ))}
               </div>
             </div>

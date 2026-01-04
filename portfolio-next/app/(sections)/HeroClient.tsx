@@ -16,30 +16,40 @@ export function HeroClient() {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4">
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="space-y-6"
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="space-y-12"
       >
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-4">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
-            AFNAN K.A RAFI
-          </span>
-        </h1>
+        <div className="space-y-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="inline-block px-4 py-1 border border-accent/30 bg-accent/5 mb-6"
+          >
+            <span className="text-accent font-sans text-[10px] tracking-[0.5em] uppercase font-bold">
+              Aspirant @ MBZUAI • 2026
+            </span>
+          </motion.div>
+          <h1 className="text-7xl md:text-[10rem] font-display font-bold tracking-tighter text-primary leading-[0.9]">
+            AFNAN<br />K.A RAFI
+          </h1>
+        </div>
 
-        <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light">
-          MBZUAI Aspirant & Full Stack Engineer
+        <p className="text-2xl md:text-3xl text-secondary max-w-3xl mx-auto font-sans font-light leading-relaxed">
+          Engineering <span className="text-primary font-bold italic">Autonomous Systems</span> and <span className="text-primary font-bold italic">Human-AI Interaction</span> with mathematical precision.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-4 mt-8">
+        <div className="flex flex-wrap justify-center gap-8 mt-16">
           <MagneticButton>
             <button
               onClick={scrollToProjects}
-              className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-full font-medium transition-all shadow-[0_0_20px_rgba(6,182,212,0.5)] hover:shadow-[0_0_30px_rgba(6,182,212,0.7)]"
+              className="px-12 py-5 bg-primary text-bg hover:bg-accent hover:text-white rounded-none font-sans font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-2xl"
             >
-              View Projects
+              Explore Works
             </button>
           </MagneticButton>
           
@@ -47,10 +57,9 @@ export function HeroClient() {
             <a
               href="/resume.docx"
               download="Afnan_CV.docx"
-              className="px-8 py-3 bg-transparent border border-gray-500 hover:border-white text-gray-300 hover:text-white rounded-full font-medium transition-all flex items-center gap-2"
+              className="px-12 py-5 bg-transparent border border-white/10 hover:border-accent text-primary rounded-none font-sans font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center gap-2"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-              Download CV
+              Resume
             </a>
           </MagneticButton>
         </div>
@@ -59,11 +68,12 @@ export function HeroClient() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
       >
-        <div className="animate-bounce text-gray-500">
-          <ArrowDown size={24} />
+        <div className="flex flex-col items-center gap-4">
+          <span className="text-[10px] font-sans uppercase tracking-[0.5em] text-secondary/50 rotate-90 mb-8">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-accent to-transparent"></div>
         </div>
       </motion.div>
     </div>

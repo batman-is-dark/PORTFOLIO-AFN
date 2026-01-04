@@ -1,14 +1,13 @@
 import '../styles/globals.css';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Plus_Jakarta_Sans, Fraunces } from 'next/font/google';
 import type { Metadata } from 'next';
 import TopBar from '../components/TopBar/TopBar';
 import Footer from '../components/Footer';
 import SkipLink from '../components/SkipLink';
 import { SeoJsonLd } from '../components/SeoJsonLd';
-// Note: Guided tour (react-joyride) removed — no client-only provider is loaded here.
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-const grotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' });
+const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans' });
+const display = Fraunces({ subsets: ['latin'], variable: '--font-display' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://example.com'),
@@ -53,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   })();`;
 
   return (
-    <html lang="en" className={`${inter.variable} ${grotesk.variable} dark`}>
+    <html lang="en" className={`${sans.variable} ${display.variable} dark`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script dangerouslySetInnerHTML={{ __html: initScript }} />

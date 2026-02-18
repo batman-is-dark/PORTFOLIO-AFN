@@ -9,25 +9,30 @@ export function RadarView() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [centerIndex, setCenterIndex] = useState(0);
   
-  // Calculate positions for radar layout (circular)
+  // Calculate positions for radar layout (circular with larger radius)
   const projectPositions = useMemo(() => {
     const count = projects.length;
-    const radius = 30; // Percentage from center
+    const radius = 38; // Increased radius to prevent clumping
     
     return projects.map((_, index) => {
-      // Center project is always at index 0
+      // Center project
       if (index === centerIndex) {
         return {
           x: 50,
           y: 50,
           rotation: 0,
-          scale: 1,
+          scale: 1.1,
           isCenter: true,
+          zIndex: 10,
         };
       }
       
-      // Other projects arranged in circle
-      const angle = ((index - centerIndex + count) % count) * (360 / count) * (Math.PI / 180);
+      // Calculate angle - distribute evenly around circle
+      // Start from top ( -90 degrees ) and go clockwise
+      const angleOffset = -Math.PI / 2; // Start from top
+      const angleStep = (2 * Math.PI) / count;
+      const angle = angleOffset + ((index - centerIndex + count) % count) * angleStep;
+      
       const x = 50 + radius * Math.cos(angle);
       const y = 50 + radius * Math.sin(angle);
       
@@ -38,8 +43,9 @@ export function RadarView() {
         x,
         y,
         rotation,
-        scale: 0.85,
+        scale: 0.9,
         isCenter: false,
+        zIndex: 5,
       };
     });
   }, [centerIndex]);
@@ -51,11 +57,11 @@ export function RadarView() {
   };
 
   return (
-    <div className="relative w-full h-[700px] lg:h-[800px] overflow-hidden">
+    <div className="relative w-full min-h-[800px] lg:min-h-[900px] overflow-hidden py-8">
       {/* Radar background */}
       <div className="absolute inset-0 bg-radar-grid">
-        {/* Range rings */}
-        {[20, 40, 60].map((radius, i) => (
+        {/* Range rings - larger to accommodate spread out projects */}
+        {[25, 45, 65].map((radius, i) => (
           <div
             key={i}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#00F0FF]/10"
@@ -74,7 +80,7 @@ export function RadarView() {
         
         {/* Radar sweep */}
         <motion.div
-          className="absolute left-1/2 top-1/2 w-1/2 h-1 origin-left"
+          className="absolute left-1/2 top-1/2 w-[45%] h-1 origin-left"
           style={{
             background: 'linear-gradient(90deg, transparent 0%, rgba(0,240,255,0.3) 50%, rgba(0,240,255,0.8) 100%)',
           }}
@@ -83,44 +89,52 @@ export function RadarView() {
         />
       </div>
       
-      {/* Project cards */}
-      {projects.map((project, index) => {
-        const pos = projectPositions[index];
-        return (
-          <button
-            key={project.slug}
-            onClick={() => handleCardClick(index)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleCardClick(index);
-              }
-            }}
-            className="cursor-pointer bg-transparent border-none p-0"
-            aria-label={`Focus on ${project.title} project`}
-          >
-            <RadarBlip
-              project={project}
-              position={{ x: pos.x, y: pos.y }}
-              rotation={pos.rotation}
-              scale={pos.scale}
-              isCenter={pos.isCenter}
-              onHover={() => setHoveredIndex(index)}
-              onLeave={() => setHoveredIndex(null)}
-              isHovered={hoveredIndex === index}
-            />
-          </button>
-        );
-      })}
+      {/* Project cards container */}
+      <div className="absolute inset-0">
+        {projects.map((project, index) => {
+          const pos = projectPositions[index];
+          return (
+            <button
+              key={project.slug}
+              onClick={() => handleCardClick(index)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleCardClick(index);
+                }
+              }}
+              className="absolute cursor-pointer bg-transparent border-none p-0"
+              style={{
+                left: `${pos.x}%`,
+                top: `${pos.y}%`,
+                transform: 'translate(-50%, -50%)',
+                zIndex: pos.zIndex,
+              }}
+              aria-label={`Focus on ${project.title} project`}
+            >
+              <RadarBlip
+                project={project}
+                position={{ x: 0, y: 0 }} // Position is now handled by button
+                rotation={pos.rotation}
+                scale={pos.scale}
+                isCenter={pos.isCenter}
+                onHover={() => setHoveredIndex(index)}
+                onLeave={() => setHoveredIndex(null)}
+                isHovered={hoveredIndex === index}
+              />
+            </button>
+          );
+        })}
+      </div>
       
       {/* Center marker */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none">
         <div className="w-full h-full rounded-full bg-[#FFB800] animate-pulse" />
         <div className="absolute inset-0 rounded-full bg-[#FFB800] animate-ping opacity-20" />
       </div>
       
       {/* Instructions */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-widest">
           Click cards to focus • Hover for details
         </p>

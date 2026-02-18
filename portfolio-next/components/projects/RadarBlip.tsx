@@ -30,21 +30,18 @@ export function RadarBlip({
   
   return (
     <motion.div
-      className="absolute"
-      style={{
-        left: `${position.x}%`,
-        top: `${position.y}%`,
-        transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`,
-      }}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: isHovered ? 1.05 : scale }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      style={{
+        transform: `rotate(${rotation}deg)`,
+      }}
     >
       {/* Card container */}
       <div 
-        className={`relative w-72 bg-[var(--color-surface)] rounded-xl overflow-hidden transition-all duration-300 ${
+        className={`relative w-64 lg:w-72 bg-[var(--color-surface)] rounded-xl overflow-hidden transition-all duration-300 ${
           isCenter 
             ? 'border-2 border-[#FFB800] shadow-[0_0_30px_rgba(255,184,0,0.3)]' 
             : isHovered 
@@ -56,7 +53,7 @@ export function RadarBlip({
         }}
       >
         {/* Screenshot */}
-        <div className="relative h-40 overflow-hidden">
+        <div className="relative h-36 lg:h-40 overflow-hidden">
           <Image
             src={imageUrl}
             alt={project.title}
@@ -76,7 +73,7 @@ export function RadarBlip({
               href={project.links.find(l => l.label.toLowerCase().includes('github'))?.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute top-3 right-3 p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-[#00F0FF]/20 transition-colors"
+              className="absolute top-3 right-3 p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-[#00F0FF]/20 transition-colors z-20"
               onClick={(e) => e.stopPropagation()}
             >
               <Github className="w-4 h-4 text-white" />
@@ -86,10 +83,10 @@ export function RadarBlip({
         
         {/* Content */}
         <div className="p-4">
-          <h3 className="text-lg font-bold text-white mb-1 line-clamp-1">
+          <h3 className="text-base lg:text-lg font-bold text-white mb-1 line-clamp-1">
             {project.title}
           </h3>
-          <p className="text-sm text-[var(--color-muted)] mb-3">{project.role}</p>
+          <p className="text-xs lg:text-sm text-[var(--color-muted)] mb-3">{project.role}</p>
           
           {/* Tech tags */}
           <div className="flex flex-wrap gap-1.5 mb-4">
@@ -109,11 +106,11 @@ export function RadarBlip({
               href={project.links.find(l => l.label.toLowerCase().includes('live') || l.label.toLowerCase().includes('demo'))?.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2.5 bg-[#FFB800] text-black font-semibold rounded-lg hover:bg-[#CC9300] transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-2 bg-[#FFB800] text-black font-semibold rounded-lg hover:bg-[#CC9300] transition-colors text-sm"
               onClick={(e) => e.stopPropagation()}
             >
               <span>Visit Live Site</span>
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
           )}
         </div>
@@ -121,7 +118,7 @@ export function RadarBlip({
         {/* Hover glow effect */}
         {isHovered && (
           <motion.div
-            className="absolute inset-0 rounded-xl border-2 border-[#00F0FF]"
+            className="absolute inset-0 rounded-xl border-2 border-[#00F0FF] pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

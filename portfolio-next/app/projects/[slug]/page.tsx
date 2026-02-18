@@ -58,6 +58,26 @@ export default function ProjectDetailPage({ params }: PageProps) {
         <p>{project.impact}</p>
       </section>
 
+      {project.links && project.links.length > 0 && (
+        <section className={styles.section} aria-labelledby="links-heading">
+          <h2 id="links-heading">Links</h2>
+          <div className="flex flex-wrap gap-4 mt-6">
+            {project.links.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-black transition-colors uppercase tracking-widest font-bold text-sm"
+              >
+                {link.label}
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className={styles.media} aria-labelledby="media-heading">
         <h2 id="media-heading" className="visually-hidden">Media</h2>
         <figure>

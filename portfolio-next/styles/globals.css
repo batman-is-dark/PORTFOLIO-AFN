@@ -48,26 +48,22 @@ body::before, body::after {
   display: none;
 }
 
-@keyframes subtle-shift {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
+/* Hardware acceleration for smoother animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-20px) translateX(10px);
-    opacity: 0.6;
-  }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Fix for fixed header overlap */
+section {
+  scroll-margin-top: 80px;
 }
 
 body > * {
@@ -137,7 +133,6 @@ a { color: inherit; text-decoration: none; }
   border-radius: inherit;
   padding: 2px;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
-  /* Use both standard and webkit mask for broader compatibility */
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -286,3 +281,136 @@ a { color: inherit; text-decoration: none; }
 /* Make room for fixed header */
 main#main { padding-top: 64px; }
 @media (max-width:640px) { main#main { padding-top: 56px; } }
+
+/* Fix animation performance */
+* {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Smooth transitions */
+button, a, input, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Aviation-themed utilities */
+.text-cyan {
+  color: var(--color-cyan);
+}
+
+.text-amber {
+  color: var(--color-amber);
+}
+
+.bg-cyan {
+  background-color: var(--color-cyan);
+}
+
+.bg-amber {
+  background-color: var(--color-amber);
+}
+
+.text-cyan-glow {
+  color: var(--color-cyan);
+  text-shadow: 0 0 20px rgba(0,240,255,0.5), 0 0 40px rgba(0,240,255,0.3);
+}
+
+.text-amber-glow {
+  color: var(--color-amber);
+  text-shadow: 0 0 20px rgba(255,184,0,0.5), 0 0 40px rgba(255,184,0,0.3);
+}
+
+.border-cyan {
+  border-color: var(--color-cyan);
+}
+
+.border-amber {
+  border-color: var(--color-amber);
+}
+
+.border-amber-glow {
+  border-color: var(--color-amber);
+  box-shadow: 0 0 20px rgba(255,184,0,0.3), inset 0 0 20px rgba(255,184,0,0.1);
+}
+
+.bg-radar-grid {
+  background-image: 
+    radial-gradient(circle at center, rgba(0,240,255,0.03) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(0,240,255,0.02) 100px, transparent 100px),
+    radial-gradient(circle at center, rgba(0,240,255,0.01) 200px, transparent 200px);
+  background-size: 20px 20px, 100% 100%, 100% 100%;
+}
+
+/* Radar sweep animation */
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+
+/* Blip pulse animation */
+@keyframes blip-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.animate-blip-pulse {
+  animation: blip-pulse 2s ease-in-out infinite;
+}
+
+/* Target lock animation */
+@keyframes target-lock {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(255,184,0,0.4);
+  }
+  70% { 
+    box-shadow: 0 0 0 10px rgba(255,184,0,0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(255,184,0,0);
+  }
+}
+
+.animate-target-lock {
+  animation: target-lock 1s ease-out;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile */
+  .animate-radar-sweep {
+    animation-duration: 6s;
+  }
+  
+  /* Touch-friendly tap targets */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* Performance: Reduce motion for low-power devices */
+@media (prefers-reduced-motion: reduce), (update: slow) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

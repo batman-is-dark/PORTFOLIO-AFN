@@ -16,7 +16,11 @@ const skinDisease: Project = {
     { label: 'Live Demo', url: 'https://dermavision-12-sci-k.vercel.app' },
     { label: 'GitHub', url: 'https://github.com/batman-is-dark' } // Using profile link as repo link wasn't specific
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/skin-disease-hero-01.jpg',
+    thumb: '/images/projects/skin-disease-hero-01.jpg'
+  }
 };
 
 export default skinDisease;

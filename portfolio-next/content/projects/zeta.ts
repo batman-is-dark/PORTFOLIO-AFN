@@ -20,7 +20,11 @@ const zeta: Project = {
     { label: 'Case Study', url: 'https://example.com/forecasting-case' },
     { label: 'Dashboard', url: 'https://example.com/forecasting-dash' }
   ],
-  featured: false
+  featured: false,
+  images: {
+    hero: '/images/projects/zeta.png',
+    thumb: '/images/projects/zeta.png'
+  }
 };
 
 export default zeta;

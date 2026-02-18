@@ -20,7 +20,11 @@ const beta: Project = {
     { label: 'Overview', url: 'https://example.com/perf-budget-ci' },
     { label: 'Repository', url: 'https://github.com/example/perf-budget-ci' }
   ],
-  featured: false
+  featured: false,
+  images: {
+    hero: '/images/projects/beta.png',
+    thumb: '/images/projects/beta.png'
+  }
 };
 
 export default beta;

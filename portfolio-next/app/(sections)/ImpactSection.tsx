@@ -4,12 +4,13 @@ import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { impactRoles } from '../../content/impact';
 import { motion, AnimatePresence } from 'framer-motion';
+import InstructionOverlay from '../../components/ui/InstructionOverlay';
 
-const ImpactCanvas = dynamic(() => import('../../components/three/ImpactCanvas'), {
+const ImpactWorld = dynamic(() => import('../../components/three/ImpactWorld'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full bg-bg flex items-center justify-center">
-      <div className="text-accent font-sans animate-pulse">Loading Experience...</div>
+      <div className="text-accent font-sans animate-pulse">Initializing Neural Nexus...</div>
     </div>
   ),
 });
@@ -30,8 +31,11 @@ export function ImpactSection() {
     setActiveId(impactRoles[prevIndex].id);
   }, [activeIndex]);
   
-  // Keyboard navigation
+  // Keyboard and Scroll navigation
   useEffect(() => {
+    let lastScrollTime = 0;
+    const scrollThreshold = 1000; // ms
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
@@ -43,41 +47,112 @@ export function ImpactSection() {
         setActiveId(null);
       }
     };
+
+    const handleWheel = (e: WheelEvent) => {
+        // Only if we're in this section (this is a simplified check)
+        const now = Date.now();
+        if (now - lastScrollTime < scrollThreshold) return;
+
+        if (Math.abs(e.deltaY) > 50) {
+            if (e.deltaY > 0) goToNext();
+            else goToPrevious();
+            lastScrollTime = now;
+        }
+    };
     
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    // window.addEventListener('wheel', handleWheel, { passive: false }); // Optional: could be annoying if user wants to scroll past
+    return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        // window.removeEventListener('wheel', handleWheel);
+    };
   }, [activeId, goToNext, goToPrevious]);
 
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-bg" aria-labelledby="impact-heading">
       <div className="absolute top-12 left-12 z-10 pointer-events-none">
         <h2 id="impact-heading" className="text-5xl md:text-7xl font-display font-bold text-primary mb-2">
-          Beyond the Screen
+          Nexus of Impact
         </h2>
-        <p className="text-accent font-sans text-sm tracking-[0.2em] uppercase">
-          Leadership & Real-World Impact
+        <p className="text-accent font-sans text-sm tracking-[0.2em] uppercase text-primary/60">
+          Spheres of Influence & Leadership
         </p>
       </div>
 
-      {/* 3D Canvas Layer */}
+      {/* 3D World Layer */}
       <div className="absolute inset-0 z-0">
-        <ImpactCanvas activeId={activeId} setActiveId={setActiveId} />
+        <ImpactWorld activeId={activeId} setActiveId={setActiveId} />
+      </div>
+
+      {/* Nexus HUD Selector */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex items-center gap-6">
+        {impactRoles.map((role, i) => (
+          <button
+            key={role.id}
+            onClick={() => setActiveId(role.id === activeId ? null : role.id)}
+            className="group relative flex flex-col items-center"
+          >
+            <div 
+              className={`w-3 h-3 rounded-full border-2 transition-all duration-500 ${
+                activeId === role.id 
+                ? 'scale-150 bg-primary border-primary shadow-[0_0_15px_rgba(255,255,255,0.8)]' 
+                : 'bg-white/10 border-white/20 hover:border-white/50'
+              }`}
+            />
+            <span className={`absolute top-6 text-[8px] font-mono tracking-tighter uppercase transition-all duration-300 ${
+              activeId === role.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 group-hover:opacity-40'
+            } text-white whitespace-nowrap`}>
+              {role.title.split(' ')[0]}
+            </span>
+          </button>
+        ))}
       </div>
 
       {/* Interface Hints */}
-      <div className="absolute bottom-12 left-12 z-10 pointer-events-none hidden md:block">
-        <div className="flex items-center gap-4 text-primary/40 font-sans text-xs tracking-widest">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            DRAG TO EXPLORE • USE ARROW KEYS
-          </div>
-          <span>|</span>
-          <div className="flex items-center gap-2">
-            <kbd className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px]">ESC</kbd>
-            CLOSE
-          </div>
-        </div>
+      <div className="absolute bottom-12 left-12 z-10 hidden lg:block">
+        <InstructionOverlay type="drag" text="Explore the Nexus" />
       </div>
+
+      <div className="absolute top-12 right-12 z-10 hidden md:flex items-center gap-4 text-primary/40 font-mono text-xs">
+          <span className="flex items-center gap-2">
+            <span className="w-4 h-4 rounded border border-white/20 flex items-center justify-center">←</span>
+            <span className="w-4 h-4 rounded border border-white/20 flex items-center justify-center">→</span>
+            NAVIGATE
+          </span>
+          <span>|</span>
+          <span className="flex items-center gap-2">
+            <span className="px-1.5 py-0.5 rounded border border-white/20">ESC</span>
+            CLOSE
+          </span>
+      </div>
+
+      {/* Prominent Arrow Key Instruction */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+        className="absolute top-1/2 left-12 z-10 hidden lg:flex flex-col items-start gap-4 pointer-events-none"
+      >
+        <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-[#FF3300]/10 to-transparent border border-[#FF3300]/30 backdrop-blur-sm">
+          <div className="flex gap-1.5">
+            <div className="w-8 h-8 rounded border-2 border-[#FF3300] flex items-center justify-center text-[#FF3300] text-sm font-bold">↑</div>
+            <div className="w-8 h-8 rounded border-2 border-[#FF3300]/40 flex items-center justify-center text-[#FF3300]/40 text-sm font-bold">↓</div>
+          </div>
+          <div className="flex gap-1.5">
+            <div className="w-8 h-8 rounded border-2 border-[#FF3300] flex items-center justify-center text-[#FF3300] text-sm font-bold">←</div>
+            <div className="w-8 h-8 rounded border-2 border-[#FF3300] flex items-center justify-center text-[#FF3300] text-sm font-bold">→</div>
+          </div>
+          <span className="text-[#FF3300] font-mono text-xs font-bold tracking-widest uppercase ml-2">Navigate Stations</span>
+        </div>
+        
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-[#FF3300]/60 text-[10px] font-mono tracking-widest uppercase"
+        >
+          ↓ Explore the Nexus ↓
+        </motion.div>
+      </motion.div>
 
       {/* Detail Overlay (Evidence Deck) */}
       <AnimatePresence>
@@ -87,9 +162,11 @@ export function ImpactSection() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="absolute top-0 right-0 h-full w-full md:w-[450px] z-20 bg-surface/90 backdrop-blur-xl border-l border-white/5 p-8 flex flex-col pt-24 md:pt-12 shadow-2xl overflow-hidden"
+            className="absolute top-0 right-0 h-full w-full md:w-[450px] z-20 bg-surface/90 backdrop-blur-xl border-l border-white/5 p-8 flex flex-col pt-24 md:pt-12 overflow-hidden"
             style={{
-              borderLeft: `2px solid ${activeRole.color}`,
+              borderLeft: `3px solid ${activeRole.color}`,
+              boxShadow: `0 0 40px ${activeRole.color}15, inset 0 0 60px ${activeRole.color}05`,
+              background: `linear-gradient(135deg, rgba(15,15,15,0.95) 0%, ${activeRole.color}08 100%)`
             }}
           >
             <button 

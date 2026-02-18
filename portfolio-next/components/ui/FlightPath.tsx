@@ -240,83 +240,193 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
   const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
   const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
 
+  // Get category color based on tech stack
+  const getCategoryInfo = (project: any) => {
+    const stack = project.stack?.join(' ').toLowerCase() || '';
+    if (stack.includes('tensorflow') || stack.includes('python') || project.slug.includes('disease')) {
+      return { color: '#FF6B35', category: 'AI/ML', icon: '🧠' };
+    }
+    if (stack.includes('react') || stack.includes('next')) {
+      return { color: '#61DAFB', category: 'Web Dev', icon: '⚛️' };
+    }
+    if (stack.includes('three') || stack.includes('webgl')) {
+      return { color: '#22d3ee', category: '3D/WebGL', icon: '🎮' };
+    }
+    return { color: '#34D399', category: 'General', icon: '🚀' };
+  };
+
+  const categoryInfo = getCategoryInfo(project);
+  
   return (
     <motion.div
       ref={cardRef}
       style={{ opacity, scale, y }}
-      className="group relative w-full md:w-[45%] bg-white/[0.03] backdrop-blur-md border border-white/10 p-8 rounded-2xl hover:bg-white/[0.05] transition-all duration-500 hover:border-cyan-500/50"
+      className="group relative w-full md:w-[45%] bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-3xl hover:bg-white/[0.04] transition-all duration-700 hover:border-cyan-500/30 overflow-visible mb-8 p-8"
     >
-      {/* Project Index Badge */}
-      <div className="absolute -top-4 -left-4 w-10 h-10 bg-cyan-500 text-gray-950 flex items-center justify-center font-bold rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.5)] z-20">
-        0{index + 1}
+      {/* Enhanced Project Index Badge - Fixed positioning */}
+      <div 
+        className="absolute -top-3 -left-3 w-14 h-14 rounded-2xl text-gray-950 flex items-center justify-center font-bold text-lg shadow-2xl z-30 border-2 border-white/20"
+        style={{ 
+          background: `linear-gradient(135deg, ${categoryInfo.color}, ${categoryInfo.color}dd)`,
+          boxShadow: `0 8px 25px ${categoryInfo.color}40, 0 0 0 1px ${categoryInfo.color}20`
+        }}
+      >
+        {String(index + 1).padStart(2, '0')}
       </div>
 
-      {/* Waypoint Marker */}
-      <div className="absolute -top-8 left-1/2 -translate-x-1/2 flex items-center flex-col z-30">
-        <div className="w-4 h-4 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-300 shadow-[0_0_12px_rgba(34,211,238,0.45)] animate-pulse" />
-        <div className="w-px h-6 bg-white/10 mt-1" />
-      </div>
-
-      {/* Background thumbnail behind the card (dim + blurred) */}
-      {project.three?.fallbackImage && (
-        <div className="absolute inset-0 rounded-2xl -z-10 overflow-hidden pointer-events-none">
-          <img
-            src={project.three.fallbackImage}
-            alt={`${project.title} preview`}
-            className="w-full h-full object-cover opacity-30 blur-sm scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+      {/* Category Badge */}
+      <div className="absolute -top-2 right-4 z-20">
+        <div 
+          className="px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 border border-white/20"
+          style={{ 
+            background: `${categoryInfo.color}15`,
+            color: categoryInfo.color,
+            borderColor: `${categoryInfo.color}30`
+          }}
+        >
+          <span>{categoryInfo.icon}</span>
+          {categoryInfo.category}
         </div>
-      )}
+      </div>
 
-      <div className="relative z-10">
-        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-cyan-500 font-mono text-sm mb-4 uppercase tracking-wider">
-          {project.role}
-        </p>
+      {/* Animated Progress Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 rounded-t-3xl overflow-hidden">
+        <motion.div 
+          className="h-full rounded-t-3xl"
+          style={{ 
+            background: `linear-gradient(90deg, ${categoryInfo.color}, ${categoryInfo.color}80)`,
+            width: useTransform(scrollYProgress, [0, 0.5], ['0%', '100%'])
+          }}
+        />
+      </div>
 
-        {/* Inline thumbnail removed — using background image behind the card instead */}
+      {/* Enhanced Waypoint Marker */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center flex-col z-20">
+        <motion.div 
+          className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+          style={{ 
+            background: `linear-gradient(135deg, ${categoryInfo.color}, ${categoryInfo.color}80)`,
+            boxShadow: `0 0 20px ${categoryInfo.color}50`
+          }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          {categoryInfo.icon}
+        </motion.div>
+        <div className="w-px h-8 bg-gradient-to-b from-cyan-400/50 to-transparent mt-2" />
+      </div>
 
-        <p className="text-gray-400 mb-6 leading-relaxed">
+      {/* Reading Time Indicator */}
+      <div className="absolute top-4 right-4 text-xs text-white/40 font-mono flex items-center gap-1">
+        <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+        2 min read
+      </div>
+
+      <div className="relative z-10 mt-6">
+        <div className="flex items-start justify-between mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 leading-tight">
+            {project.title}
+          </h3>
+          {project.featured && (
+            <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-500/30">
+              <div className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
+              <span className="text-yellow-400 text-xs font-bold">FEATURED</span>
+            </div>
+          )}
+        </div>
+        
+        <div className="flex items-center justify-between mb-4">
+          <p className="font-mono text-sm mb-0 uppercase tracking-wider text-cyan-500">
+            {project.role}
+          </p>
+          <span className="text-white/30 text-sm font-mono">{project.timeframe}</span>
+        </div>
+
+        <p className="text-gray-300 mb-6 leading-relaxed text-sm line-clamp-3 group-hover:text-gray-200 transition-colors">
           {project.problem}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-8">
-          {project.stack.map((tech: string) => (
-            <span 
-              key={tech}
-              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-300 font-mono"
-            >
-              {tech}
-            </span>
-          ))}
+        {/* Enhanced Tech Stack with better visual hierarchy */}
+        <div className="mb-8">
+          <div className="flex flex-wrap gap-2">
+            {project.stack.map((tech: string, idx: number) => (
+              <motion.span 
+                key={tech}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.1 }}
+                className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-xs text-gray-300 font-mono transition-all duration-300 cursor-default"
+              >
+                {tech}
+              </motion.span>
+            ))}
+          </div>
         </div>
 
-        <div className="flex items-center gap-6">
+        {/* Enhanced Links Section */}
+        <div className="flex items-center gap-4">
           {project.links?.map((link: any) => (
-            <a
+            <motion.a
               key={link.url}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-cyan-400 transition-colors flex items-center gap-2 group/link"
+              className="text-white hover:text-cyan-400 transition-all duration-300 flex items-center gap-2 group/link relative"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <span className="text-sm font-medium">{link.label}</span>
               <svg 
-                className="w-4 h-4 transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" 
+                className="w-4 h-4 transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300" 
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-            </a>
+              {link.label.toLowerCase().includes('live') && (
+                <span className="ml-2 px-2 py-0.5 text-[10px] font-bold bg-cyan-500/20 text-cyan-400 rounded-full border border-cyan-500/30 animate-pulse">LIVE</span>
+              )}
+              
+              {/* Hover effect underline */}
+              <motion.div 
+                className="absolute bottom-0 left-0 h-0.5 bg-cyan-400 rounded-full"
+                initial={{ width: 0 }}
+                whileHover={{ width: '100%' }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
           ))}
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[60px] rounded-full -z-10 group-hover:bg-cyan-500/20 transition-all duration-500" />
+      {/* Background Image */}
+      {project.images?.hero && (
+        <div className="absolute inset-0 rounded-3xl -z-10 overflow-hidden pointer-events-none">
+          <img
+            src={project.images.hero}
+            alt={`${project.title} preview`}
+            className="w-full h-full object-cover opacity-20 blur-sm scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60" />
+        </div>
+      )}
+
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none rounded-3xl">
+        <div className="w-full h-full" style={{
+          backgroundImage: `radial-gradient(circle at 20% 80%, ${categoryInfo.color}20 0%, transparent 50%),
+                           radial-gradient(circle at 80% 20%, ${categoryInfo.color}10 0%, transparent 50%)`,
+        }} />
+      </div>
+
+      {/* Interactive hover glow */}
+      <motion.div 
+        className="absolute inset-0 rounded-3xl pointer-events-none"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        style={{
+          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${categoryInfo.color}05, transparent 40%)`,
+        }}
+      />
     </motion.div>
   );
 }

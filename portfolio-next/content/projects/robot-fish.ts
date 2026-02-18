@@ -13,7 +13,11 @@ const robotFish: Project = {
     reel: null,
     three: null,
     links: [],
-    featured: true
+    featured: true,
+    images: {
+        hero: '/images/projects/robot-fish.png',
+        thumb: '/images/projects/robot-fish.png'
+    }
 };
 
 export default robotFish;

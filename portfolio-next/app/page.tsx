@@ -7,7 +7,6 @@ import { ImpactSection } from './(sections)/ImpactSection';
 import { Academic } from './(sections)/Academic';
 import { Achievements } from './(sections)/Achievements';
 import { Contact } from './(sections)/Contact';
-import FilmGrain from '../components/ui/FilmGrain';
 
 export default function HomePage() {
   return (
@@ -20,8 +19,6 @@ export default function HomePage() {
       <ProjectsSection />
       <Achievements />
       <Contact />
-      
-      <FilmGrain />
     </main>
   );
 }

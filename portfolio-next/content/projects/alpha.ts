@@ -16,7 +16,11 @@ const alpha: Project = {
     { label: 'Overview', url: 'https://example.com/tokens-pipeline' },
     { label: 'Repository', url: 'https://github.com/example/tokens-pipeline' }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/alpha.png',
+    thumb: '/images/projects/alpha.png'
+  }
 };
 
 export default alpha;

@@ -1,39 +1,50 @@
-/* Theme definitions (light/dark) with contrast-safe palettes */
+/* Theme definitions — Neural Aesthetics */
 :root,
-[data-theme="light"] {
-  color-scheme: light;
-
-  /* Light theme - Warm Paper/Editorial */
-  --color-bg: #F7F5F0;
-  --color-fg: #1A1C20;
-  --color-muted: #64748B;
-  --color-border: #E2E8F0;
-  --color-accent: #FF3300;
-  --color-accent-contrast: #FFFFFF;
-}
-
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* Dark theme - Deep Midnight Navy */
-  --color-bg: #0B1221;
-  --color-fg: #F1F5F9;
-  --color-muted: #94A3B8;
-  --color-border: #1E293B;
-  --color-accent: #FF3300;
-  --color-accent-contrast: #FFFFFF;
+  --color-bg: #050508;
+  --color-bg-elevated: #0a0a10;
+  --color-surface: #0f0f18;
+  --color-surface-hover: #16162a;
+  --color-fg: #f0f0f5;
+  --color-muted: #6b7094;
+  --color-border: rgba(255,255,255,0.06);
+  --color-border-hover: rgba(255,255,255,0.12);
+  --color-accent: #00F0FF;
+  --color-accent-secondary: #8B5CF6;
+  --color-accent-contrast: #000000;
 }
 
-/* Auto-apply dark when no explicit theme is set */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #fafafa;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #f0f0f5;
+  --color-surface-hover: #e8e8f0;
+  --color-fg: #0a0a12;
+  --color-muted: #6b7094;
+  --color-border: rgba(0,0,0,0.08);
+  --color-border-hover: rgba(0,0,0,0.15);
+  --color-accent: #0090A0;
+  --color-accent-secondary: #7C3AED;
+  --color-accent-contrast: #ffffff;
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-
-    --color-bg: #0B1221;
-    --color-fg: #F1F5F9;
-    --color-muted: #94A3B8;
-    --color-border: #1E293B;
-    --color-accent: #FF3300;
-    --color-accent-contrast: #FFFFFF;
+    --color-bg: #050508;
+    --color-bg-elevated: #0a0a10;
+    --color-surface: #0f0f18;
+    --color-surface-hover: #16162a;
+    --color-fg: #f0f0f5;
+    --color-muted: #6b7094;
+    --color-border: rgba(255,255,255,0.06);
+    --color-border-hover: rgba(255,255,255,0.12);
+    --color-accent: #00F0FF;
+    --color-accent-secondary: #8B5CF6;
+    --color-accent-contrast: #000000;
   }
 }

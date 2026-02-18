@@ -21,5 +21,9 @@ export const misinformationSimulatorProject: Project = {
     { label: "Github", url: "https://github.com/batman-is-dark/Misinformation-Cascade-Simulator" },
     { label: "Live Demo", url: "https://misinformation-cascade-simulator.vercel.app/" }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/misinformation-simulator.png',
+    thumb: '/images/projects/misinformation-simulator.png'
+  }
 };

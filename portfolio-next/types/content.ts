@@ -20,13 +20,14 @@ export const ReelAssetSchema = z.object({
   sources: z.array(ReelSourceSchema).nonempty(),
   width: z.number().positive(),
   height: z.number().positive(),
-  durationSec: z.number().positive().optional(), // TODO: derive from media when available
+  durationSec: z.number().positive().optional(),
 });
 export type ReelAsset = z.infer<typeof ReelAssetSchema>;
 
 /* ---------- Three.js assets (interactive models) ---------- */
 
 export const ThreeAssetSchema = z.object({
+  type: z.string().optional(),
   model: z.string().min(1),
   draco: z.boolean().optional(),
   fallbackImage: z.string().min(1),
@@ -35,6 +36,14 @@ export const ThreeAssetSchema = z.object({
   alt: z.string().min(1),
 });
 export type ThreeAsset = z.infer<typeof ThreeAssetSchema>;
+
+/* ---------- Project images ---------- */
+
+export const ProjectImageSchema = z.object({
+  hero: z.string().min(1),
+  thumb: z.string().min(1),
+});
+export type ProjectImage = z.infer<typeof ProjectImageSchema>;
 
 /* ---------- External links ---------- */
 
@@ -58,6 +67,7 @@ export const ProjectSchema = z.object({
   impact: z.string().min(1),
   reel: ReelAssetSchema.nullable().optional(),
   three: ThreeAssetSchema.nullable().optional(),
+  images: ProjectImageSchema.optional(),
   links: z.array(ExternalLinkSchema).optional(),
   featured: z.boolean().optional(),
 });

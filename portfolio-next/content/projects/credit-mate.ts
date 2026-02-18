@@ -21,5 +21,9 @@ export const creditMateProject: Project = {
     { label: "Github", url: "https://github.com/batman-is-dark/credit-mate" },
     { label: "Live Demo", url: "https://batman-is-dark.github.io/credit-mate/" }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/credit-mate.png',
+    thumb: '/images/projects/credit-mate.png'
+  }
 };

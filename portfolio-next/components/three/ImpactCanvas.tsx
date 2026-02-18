@@ -319,8 +319,10 @@ function Scene({ activeId, setActiveId }: {
         maxZoom={80}
         rotateSpeed={0.5}
         zoomSpeed={0.5}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI}
       />
-      
+
       {/* Lighting */}
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 20, 5]} intensity={1} castShadow />

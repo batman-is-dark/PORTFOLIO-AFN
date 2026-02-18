@@ -21,5 +21,9 @@ export const digiAddictProject: Project = {
     { label: "Github", url: "https://github.com/batman-is-dark/DigiAddict" },
     { label: "Live Demo", url: "https://digi-addict-cxne.vercel.app/" }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/digi-addict.png',
+    thumb: '/images/projects/digi-addict.png'
+  }
 };

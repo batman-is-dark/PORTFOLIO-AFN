@@ -20,7 +20,11 @@ const epsilon: Project = {
     { label: 'Demo', url: 'https://example.com/sentiment-demo' },
     { label: 'Blog Post', url: 'https://example.com/sentiment-blog' }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/epsilon.png',
+    thumb: '/images/projects/epsilon.png'
+  }
 };
 
 export default epsilon;

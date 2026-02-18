@@ -15,7 +15,11 @@ const environmentalAnalysis: Project = {
     links: [
         { label: 'GitHub', url: 'https://github.com/batman-is-dark' }
     ],
-    featured: true
+    featured: true,
+    images: {
+        hero: '/images/projects/environmental-analysis.png',
+        thumb: '/images/projects/environmental-analysis.png'
+    }
 };
 
 export default environmentalAnalysis;

@@ -20,7 +20,11 @@ const delta: Project = {
     { label: 'Paper', url: 'https://example.com/image-classification' },
     { label: 'GitHub', url: 'https://github.com/example/image-classifier' }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/delta.png',
+    thumb: '/images/projects/delta.png'
+  }
 };
 
 export default delta;

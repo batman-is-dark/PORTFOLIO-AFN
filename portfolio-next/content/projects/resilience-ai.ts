@@ -21,5 +21,9 @@ export const resilienceAIProject: Project = {
     { label: "Github", url: "https://github.com/batman-is-dark/ResilienceAI" },
     { label: "Live Demo", url: "https://resilience-ai-phi.vercel.app/" }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/resilience-ai.png',
+    thumb: '/images/projects/resilience-ai.png'
+  }
 };

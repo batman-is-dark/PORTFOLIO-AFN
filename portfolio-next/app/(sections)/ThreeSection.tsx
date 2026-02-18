@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import InstructionOverlay from '../../components/ui/InstructionOverlay'; // Import added
 
 const ThreeScene = dynamic(() => import('../../components/three/ThreeScene'), {
   ssr: false,
@@ -43,7 +44,12 @@ export default function ThreeSection() {
           Drag to rotate, scroll to zoom.
         </p>
         
-        <ThreeScene />
+        <div className="relative">
+          <ThreeScene />
+          <div className="absolute bottom-6 right-6 pointer-events-none">
+            <InstructionOverlay type="drag" text="Drag to Rotate" />
+          </div>
+        </div>
         
         <noscript>
           <FallbackImage />

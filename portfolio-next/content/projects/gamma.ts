@@ -20,7 +20,11 @@ const gamma: Project = {
     { label: 'Overview', url: 'https://example.com/ds-audit' },
     { label: 'Repository', url: 'https://github.com/example/ds-audit' }
   ],
-  featured: false
+  featured: false,
+  images: {
+    hero: '/images/projects/gamma.png',
+    thumb: '/images/projects/gamma.png'
+  }
 };
 
 export default gamma;

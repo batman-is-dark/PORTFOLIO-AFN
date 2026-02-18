@@ -6,8 +6,10 @@ import { poliseeProject } from './polisee';
 import { resilienceAIProject } from './resilience-ai';
 import { digiAddictProject } from './digi-addict';
 import { misinformationSimulatorProject } from './misinformation-simulator';
+import { skinDiseaseProject } from './skin-disease-detection';
 
 const raw = [
+  skinDiseaseProject,
   creditMateProject,
   poliseeProject,
   resilienceAIProject,

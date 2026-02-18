@@ -20,7 +20,11 @@ const theta: Project = {
     { label: 'Article', url: 'https://example.com/recommendation-engine' },
     { label: 'Presentation', url: 'https://example.com/rec-slides' }
   ],
-  featured: false
+  featured: false,
+  images: {
+    hero: '/images/projects/theta.png',
+    thumb: '/images/projects/theta.png'
+  }
 };
 
 export default theta;

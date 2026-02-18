@@ -21,5 +21,9 @@ export const poliseeProject: Project = {
     { label: "Github", url: "https://github.com/batman-is-dark/PoliSEE" },
     { label: "Live Demo", url: "https://poli-see.vercel.app/" }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/polisee.png',
+    thumb: '/images/projects/polisee.png'
+  }
 };

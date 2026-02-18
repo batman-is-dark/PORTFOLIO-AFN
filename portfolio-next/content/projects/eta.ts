@@ -20,7 +20,11 @@ const eta: Project = {
     { label: 'Technical Report', url: 'https://example.com/object-detection' },
     { label: 'GitHub', url: 'https://github.com/example/yolo-pipeline' }
   ],
-  featured: true
+  featured: true,
+  images: {
+    hero: '/images/projects/eta.png',
+    thumb: '/images/projects/eta.png'
+  }
 };
 
 export default eta;

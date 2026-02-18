@@ -18,7 +18,6 @@ import {
 } from '@react-three/drei';
 import * as THREE from 'three';
 import { impactRoles, ImpactRole } from '../../content/impact';
-import { motion } from 'framer-motion-3d';
 
 /**
  * Centered Wireframe Core

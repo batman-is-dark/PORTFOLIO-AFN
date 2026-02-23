@@ -1,16 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RadarView } from '../../components/projects/RadarView';
 import { FlightPathView } from '../../components/projects/FlightPathView';
 import { HangarView } from '../../components/projects/HangarView';
 import { ViewToggle } from '../../components/projects/ViewToggle';
+import { CardStack } from '../../components/CardStack';
+import type { Project } from '../../types/content';
+import type { CarouselItem } from '../../types/ui';
+import { projects } from '../../content/projects';
 
-type ViewMode = 'radar' | 'path' | 'hangar';
+// Enhanced view modes
+type ViewMode = 'radar' | 'path' | 'hangar' | 'showcase';
+
+  // Helper function to map Project to CarouselItem
+  function mapProjectToCarouselItem(project: Project): CarouselItem {
+    return {
+      id: project.slug,
+      slug: project.slug,
+      title: project.title,
+      role: project.role,
+      timeframe: project.timeframe,
+      summary: project.approach || project.outcomes || project.impact || '',
+      stack: project.stack,
+      image: project.images?.hero || project.images?.thumb || '',
+    };
+  }
 
 export function ProjectsSection() {
-  const [currentView, setCurrentView] = useState<ViewMode>('radar');
+  const [currentView, setCurrentView] = useState<ViewMode>('showcase');
+
+  // Handle project selection
+  const handleProjectSelect = useCallback((item: CarouselItem) => {
+    // Navigate to the project page using the slug from the item
+    window.location.href = `/projects/${item.slug}`;
+  }, []);
+
+  // Get project data and map to CarouselItem
+  const projectItems = projects.map(mapProjectToCarouselItem);
 
   return (
     <section 
@@ -78,6 +106,7 @@ export function ProjectsSection() {
             {currentView === 'radar' && <RadarView />}
             {currentView === 'path' && <FlightPathView />}
             {currentView === 'hangar' && <HangarView />}
+            {currentView === 'showcase' && <CardStack items={projectItems} onProjectSelect={handleProjectSelect} />}
           </motion.div>
         </AnimatePresence>
       </div>

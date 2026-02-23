@@ -88,7 +88,7 @@ export function Card({
         scale: positionVars.scale,
         opacity: positionVars.opacity,
         zIndex: positionVars.zIndex,
-      } as any}
+      } as unknown as React.CSSProperties}
       role="article"
       aria-label={`Project: ${item.title}`}
       onClick={() => {
@@ -143,9 +143,9 @@ export function Card({
           {item.stack && item.stack.length > 0 && (
             <div className={styles.cardStack}>
               {item.stack.slice(0, 4).map((tech, index) => (
-                <span
-                  key={`${item.id}-${tech}-${index}`}
-                  className={styles.stackTag}
+                 <span
+                   key={`${item.id}-${tech}`}
+                   className={styles.stackTag}
                 >
                   {tech}
                 </span>

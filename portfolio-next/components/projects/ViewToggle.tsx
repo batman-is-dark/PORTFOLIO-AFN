@@ -2,7 +2,8 @@
 
 import { Radar, GitBranch, LayoutGrid } from 'lucide-react';
 
-type ViewMode = 'radar' | 'path' | 'hangar';
+// View modes
+type ViewMode = 'radar' | 'path' | 'hangar' | 'showcase';
 
 interface ViewToggleProps {
   currentView: ViewMode;
@@ -13,6 +14,7 @@ const views = [
   { id: 'radar' as ViewMode, label: 'Radar', icon: Radar },
   { id: 'path' as ViewMode, label: 'Flight Path', icon: GitBranch },
   { id: 'hangar' as ViewMode, label: 'Hangar', icon: LayoutGrid },
+  { id: 'showcase' as ViewMode, label: 'Showcase', icon: LayoutGrid },
 ];
 
 export function ViewToggle({ currentView, onViewChange }: ViewToggleProps) {

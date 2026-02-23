@@ -251,57 +251,123 @@
 }
 
 /* Navigation Controls */
-.navigation {
+/* Navigation Container - for Navigation.tsx component */
+.navigationContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
   width: 100%;
   padding: 1rem;
+  flex-direction: column;
 }
 
 .navButton {
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 51, 0, 0.2) 0%, rgba(255, 51, 0, 0.1) 100%);
-  border: 1px solid rgba(255, 51, 0, 0.4);
-  color: #FF9970;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(0, 240, 255, 0.05) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #00F0FF;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  padding: 0;
 }
 
-.navButton:hover {
-  background: linear-gradient(135deg, rgba(255, 51, 0, 0.3) 0%, rgba(255, 51, 0, 0.2) 100%);
-  border-color: rgba(255, 51, 0, 0.6);
+.navButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(0, 240, 255, 0.15) 100%);
+  border-color: rgba(0, 240, 255, 0.5);
   color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+  transform: scale(1.05);
 }
 
-.navButton:active {
+.navButton:active:not(:disabled) {
   transform: scale(0.95);
 }
 
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .navButton:focus-visible {
-  outline: 2px solid #FF3300;
+  outline: 2px solid #00F0FF;
   outline-offset: 2px;
 }
 
-/* Indicator Container */
-.indicatorContainer {
+/* StackIndicator Styles */
+.indicator {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 0.75rem;
+  flex-wrap: wrap;
 }
 
-.position {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 600;
-  min-width: 60px;
+.counterContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.counter {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00F0FF;
+  min-width: 3rem;
   text-align: center;
+}
+
+.divider {
+  color: rgba(0, 240, 255, 0.5);
+}
+
+.total {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dotsContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 240, 255, 0.4);
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #00F0FF;
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+/* Screen Reader Only Text */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* Keyboard Hint */
@@ -312,6 +378,10 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-top: 1rem;
+}
+
+.hintText {
+  opacity: 0.7;
 }
 
 /* Empty State */
@@ -348,9 +418,21 @@
     transition: none;
   }
 
+  .navButton:hover:not(:disabled) {
+    box-shadow: none;
+  }
+
   .cardHint {
     animation: none;
     opacity: 1;
+  }
+
+  .indicator {
+    animation: none;
+  }
+
+  .dot {
+    transition: none;
   }
 }
 
@@ -381,23 +463,36 @@
     font-size: 0.9rem;
   }
 
-  .navigation {
-    flex-direction: column;
+  .navigationContainer {
     gap: 1rem;
   }
 
   .navButton {
-    width: 100%;
-    max-width: 300px;
+    width: 40px;
+    height: 40px;
   }
 
-  .indicatorContainer {
-    width: 100%;
-    justify-content: center;
+  .keyboardHint {
+    display: none;
   }
 
-  .position {
-    min-width: auto;
+  .indicator {
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .counter {
+    font-size: 1.25rem;
+  }
+
+  .dotsContainer {
+    gap: 0.4rem;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
   }
 }
 

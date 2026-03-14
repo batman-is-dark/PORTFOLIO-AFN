@@ -1,26 +1,26 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 export default function TopBar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'top-4 left-4 right-4 bg-surface/80 backdrop-blur-md border-2 border-accent/60 py-4 rounded-xl shadow-2xl shadow-accent/20' 
-          : 'top-0 left-0 right-0 bg-transparent border-b border-transparent hover:border-white/10 py-8'
+          ? 'top-4 left-4 right-4 bg-surface/90 backdrop-blur-lg border border-accent/60 py-4 lg:py-4 rounded-2xl shadow-2xl shadow-accent/10' 
+          : 'top-0 left-0 right-0 bg-gradient-to-b from-bg/80 to-transparent border-b border-transparent py-8'
       }`}
     >
       <div className={`${isScrolled ? 'px-8' : 'max-w-7xl mx-auto px-6'} flex items-center justify-between`}>
@@ -86,6 +86,6 @@ export default function TopBar() {
           </button>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

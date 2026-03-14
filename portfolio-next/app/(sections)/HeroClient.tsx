@@ -28,19 +28,21 @@ export function HeroClient() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="inline-block px-4 py-1 border border-accent/30 bg-accent/5 mb-6"
+            className="inline-block px-4 py-1 border border-accent/50 bg-accent/10 mb-6"
           >
             <span className="text-accent font-sans text-[10px] tracking-[0.5em] uppercase font-bold">
-              Aspirant @ MBZUAI • 2026
+              ● Aspirant @ MBZUAI • 2026
             </span>
           </motion.div>
-          <h1 className="text-7xl md:text-[10rem] font-display font-bold tracking-tighter text-primary leading-[0.9]">
-            AFNAN<br />K.A RAFI
+          <h1 className="text-7xl md:text-[10rem] font-display font-bold tracking-tighter leading-[0.9]">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-yellow-400 bg-clip-text text-transparent">
+              AFNAN<br />K.A RAFI
+            </span>
           </h1>
         </div>
 
         <p className="text-2xl md:text-3xl text-secondary max-w-3xl mx-auto font-sans font-light leading-relaxed">
-          Engineering <span className="text-primary font-bold italic">Autonomous Systems</span> and <span className="text-primary font-bold italic">Human-AI Interaction</span> with mathematical precision.
+          Engineering <span className="font-bold italic bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Autonomous Systems</span> and <span className="font-bold italic bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Human-AI Interaction</span> with mathematical precision.
         </p>
 
         <div className="flex flex-wrap justify-center gap-8 mt-16">

@@ -7,7 +7,7 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/batman-is-dark', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/afnan-rafi-99aa03301/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:afnusha.r@gmail.com', label: 'Email' },
   ];
 

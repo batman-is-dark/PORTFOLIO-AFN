@@ -139,7 +139,7 @@ export function About() {
                 <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/afnan-rafi-99aa03301/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 text-primary font-sans font-bold uppercase tracking-[0.2em] text-sm hover:text-accent transition-colors"

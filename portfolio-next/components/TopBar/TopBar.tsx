@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 export default function TopBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,15 +24,12 @@ export default function TopBar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none px-4 sm:px-6 pt-4">
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`mx-auto max-w-7xl w-full pointer-events-auto transition-all duration-500 rounded-2xl flex items-center justify-between ${
+    <div className={`fixed left-0 right-0 z-50 pointer-events-none transition-all duration-500 ease-in-out ${isScrolled ? 'top-4 px-4 sm:px-6' : 'top-0 px-0'}`}>
+      <header
+        className={`mx-auto max-w-7xl w-full pointer-events-auto transition-all duration-500 flex items-center justify-between ${
           isScrolled 
-            ? 'bg-surface/90 backdrop-blur-md border border-accent/60 shadow-[0_4px_30px_rgba(255,51,0,0.15)] py-3 px-6' 
-            : 'bg-transparent border border-transparent shadow-none py-6 px-6'
+            ? 'rounded-2xl bg-surface/90 backdrop-blur-md border border-accent/60 shadow-[0_4px_30px_rgba(255,51,0,0.15)] py-3 px-6' 
+            : 'rounded-none bg-gradient-to-b from-bg/90 to-transparent border-transparent shadow-none py-6 px-6 md:px-12'
         }`}
       >
         <Link href="/" className="flex items-center gap-4 group">
@@ -95,7 +91,7 @@ export default function TopBar() {
             </svg>
           </button>
         </div>
-      </motion.header>
+      </header>
     </div>
   );
 }

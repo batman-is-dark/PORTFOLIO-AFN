@@ -16,47 +16,63 @@ export function HeroClient() {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-950">
-      {/* Subtle gradient backdrop - darkened and muted */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-900/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-900/4 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-purple-900/4 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden bg-bg">
+      {/* Premium Minimalist Background Glow */}
+      <div className="absolute inset-0 -z-10 flex items-center justify-center">
+        <div className="w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] opacity-70 animate-pulse" style={{ animationDuration: '4s' }}></div>
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="space-y-12 relative z-10"
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="space-y-10 relative z-10 w-full max-w-5xl mx-auto"
       >
-        <div className="space-y-4">
+        <div className="space-y-6">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="inline-block px-4 py-1 border border-accent/50 bg-accent/10 mb-6"
+            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+            className="flex justify-center"
           >
-            <span className="text-accent font-sans text-[10px] tracking-[0.5em] uppercase font-bold">
-              ● Aspirant @ MBZUAI • 2026
-            </span>
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+              </span>
+              <span className="text-secondary font-sans text-xs tracking-widest uppercase font-medium">
+                Aspirant @ MBZUAI • 2026
+              </span>
+            </div>
           </motion.div>
-          <h1 className="text-7xl md:text-[10rem] font-display font-bold tracking-tighter leading-[0.9]">
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-yellow-400 bg-clip-text text-transparent">
-              AFNAN<br />K.A RAFI
-            </span>
+
+          <h1 className="text-6xl sm:text-8xl md:text-[9rem] lg:text-[11rem] font-display font-bold tracking-tight leading-[0.85] text-primary">
+            AFNAN
+            <br />
+            <span className="text-white/80">K.A RAFI</span>
+            <span className="text-accent">.</span>
           </h1>
         </div>
 
-        <p className="text-2xl md:text-3xl text-secondary max-w-3xl mx-auto font-sans font-light leading-relaxed">
-          Engineering <span className="font-bold italic bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Autonomous Systems</span> and <span className="font-bold italic bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Human-AI Interaction</span> with mathematical precision.
-        </p>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="text-lg sm:text-xl md:text-2xl text-secondary max-w-2xl mx-auto font-sans font-light leading-relaxed px-4"
+        >
+          Engineering <span className="text-primary font-medium">Autonomous Systems</span> and <span className="text-primary font-medium">Human-AI Interaction</span> with mathematical precision.
+        </motion.p>
 
-        <div className="flex flex-wrap justify-center gap-8 mt-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="flex flex-col sm:flex-row flex-wrap justify-center gap-6 mt-12"
+        >
           <MagneticButton>
             <button
               onClick={scrollToProjects}
-              className="px-12 py-5 bg-primary text-bg hover:bg-accent hover:text-white rounded-none font-sans font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-2xl"
+              className="w-full sm:w-auto px-10 py-4 bg-primary text-bg hover:bg-white rounded-full font-sans font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] hover:scale-105"
             >
               Explore Works
             </button>
@@ -66,32 +82,31 @@ export function HeroClient() {
             <a
               href="/Afnan_CV.pdf"
               download="Afnan_CV.pdf"
-              className="px-12 py-5 bg-transparent border border-white/10 hover:border-accent text-primary rounded-none font-sans font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center gap-2"
+              className="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white/20 hover:border-white text-primary rounded-full font-sans font-bold text-sm uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 hover:bg-white/5 hover:scale-105"
             >
               Resume
             </a>
           </MagneticButton>
-        </div>
+        </motion.div>
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer"
         onClick={scrollToProjects}
         role="button"
         tabIndex={0}
         aria-label="Scroll to explore works"
       >
-        <div className="flex flex-col items-center gap-3 group relative">
-          {/* Pulsing ring background for visibility */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-accent/5 rounded-full blur-xl animate-pulse group-hover:bg-accent/10 transition-colors" />
-          
-          <span className="relative text-xs font-sans uppercase tracking-[0.3em] font-bold text-secondary group-hover:text-accent transition-colors drop-shadow-md bg-bg/50 px-2 py-1 rounded backdrop-blur-sm border border-transparent group-hover:border-accent/20">
-            Scroll to Explore
+        <div className="flex flex-col items-center gap-4 group">
+          <span className="text-[10px] font-sans uppercase tracking-widest text-secondary group-hover:text-primary transition-colors">
+            Scroll
           </span>
-          <ArrowDown className="relative w-6 h-6 text-accent animate-bounce mt-1 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(255,51,0,0.5)]" />
+          <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden group-hover:bg-white/40 transition-colors">
+            <div className="absolute top-0 left-0 w-full h-[50%] bg-accent animate-[scrollLine_1.5s_ease-in-out_infinite]" />
+          </div>
         </div>
       </motion.div>
     </div>

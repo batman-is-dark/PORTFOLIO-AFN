@@ -20,7 +20,7 @@ export default function TopBar() {
       className={`fixed z-50 transition-all duration-500 ${
         isScrolled 
           ? 'top-4 left-4 right-4 bg-surface/80 backdrop-blur-md border-2 border-accent/60 py-4 rounded-xl shadow-2xl shadow-accent/20' 
-          : 'top-0 left-0 right-0 bg-transparent py-8'
+          : 'top-0 left-0 right-0 bg-transparent border-b border-transparent hover:border-white/10 py-8'
       }`}
     >
       <div className={`${isScrolled ? 'px-8' : 'max-w-7xl mx-auto px-6'} flex items-center justify-between`}>

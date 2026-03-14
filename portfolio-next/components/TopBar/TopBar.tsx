@@ -24,18 +24,15 @@ export default function TopBar() {
   }, []);
 
   return (
-    <div 
-      className={`fixed left-0 right-0 z-[100] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none ${
-        isScrolled ? 'top-4 px-4 sm:px-6' : 'top-0 px-0'
-      }`}
-    >
-      <header
-        className={`mx-auto max-w-7xl w-full pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-between ${
-          isScrolled 
-            ? 'rounded-full bg-surface/95 backdrop-blur-xl border border-accent/40 shadow-[0_8px_32px_rgba(255,51,0,0.15)] py-3 px-6 md:px-8' 
-            : 'rounded-none bg-gradient-to-b from-bg/90 pb-4 to-transparent border-transparent shadow-none py-6 px-6 md:px-12'
-        }`}
-      >
+    <div className="fixed top-0 left-0 w-full z-[999] pointer-events-none">
+      <div className={`w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isScrolled ? 'p-4 sm:p-6' : 'p-0'}`}>
+        <header
+          className={`mx-auto w-full max-w-7xl pointer-events-auto transition-all duration-500 flex items-center justify-between ${
+            isScrolled 
+              ? 'rounded-full bg-surface/95 backdrop-blur-xl border border-accent/40 shadow-[0_8px_32px_rgba(255,51,0,0.15)] py-3 px-6 md:px-8' 
+              : 'rounded-none bg-bg/90 backdrop-blur-md pb-4 pt-6 md:pt-8 border-b-0 border-transparent shadow-none px-6 md:px-12'
+          }`}
+        >
         <Link href="/" className="flex items-center gap-4 group">
           <div className={`w-10 h-10 flex items-center justify-center text-white font-display font-bold text-xl transition-all duration-500 rounded-lg ${
             isScrolled ? 'bg-accent shadow-lg shadow-accent/40' : 'bg-white/10 group-hover:bg-accent/80'

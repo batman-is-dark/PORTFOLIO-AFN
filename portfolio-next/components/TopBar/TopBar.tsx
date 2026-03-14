@@ -23,9 +23,9 @@ export default function TopBar({ accent }: { accent?: string }) {
           ? 'top-4 left-4 right-4 bg-surface/80 backdrop-blur-md border-2 border-accent/60 py-4 rounded-xl shadow-2xl shadow-accent/20' 
           : 'top-0 left-0 right-0 bg-transparent py-8'
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ y: 0 }}
+      animate={{ y: isScrolled ? 0 : 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className={`${isScrolled ? 'px-8' : 'max-w-7xl mx-auto px-6'} flex items-center justify-between`}>
         <Link href="/" className="flex items-center gap-4 group">

@@ -18,12 +18,16 @@ export default function TopBar({ accent }: { accent?: string }) {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-bg/90 backdrop-blur-xl border-b border-white/10 py-4' : 'bg-transparent py-8'}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-surface/70 backdrop-blur-md border border-white/10 py-4 mx-6 top-4 left-6 right-6 rounded-xl shadow-lg shadow-black/40' 
+          : 'bg-transparent py-8'
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className={`${isScrolled ? 'mx-0' : 'max-w-7xl mx-auto'} px-6 flex items-center justify-between`}>
         <Link href="/" className="flex items-center gap-4 group">
           <div className="w-10 h-10 bg-primary group-hover:bg-accent flex items-center justify-center text-bg group-hover:text-white font-display font-bold text-2xl transition-all duration-300">
             A

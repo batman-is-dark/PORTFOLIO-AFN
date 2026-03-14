@@ -46,8 +46,8 @@ export default function TopBar({ accent }: { accent?: string }) {
 
         <div className="flex items-center gap-8">
           <a 
-            href="/resume.docx" 
-            download="Afnan_CV.docx" 
+            href="/Afnan_CV.pdf" 
+            download="Afnan_CV.pdf" 
             className="hidden md:block text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-primary hover:text-accent transition-colors relative group"
           >
             Resume

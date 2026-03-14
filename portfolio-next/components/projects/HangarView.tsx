@@ -3,13 +3,17 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ExternalLink, Github } from 'lucide-react';
-import { projects } from '../../content/projects';
+import type { Project } from '../../types/content';
 
-export function HangarView() {
+interface HangarViewProps {
+  projects: Project[];
+}
+
+export function HangarView({ projects }: HangarViewProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, index) => {
-        const imageUrl = project.images?.hero || project.three?.fallbackImage || '/images/projects/skin-disease-hero-01.jpg';
+        const imageUrl = project.images?.hero || project.three?.fallbackImage || project.reel?.poster || '/images/projects/default.jpg';
         
         return (
           <motion.div

@@ -7,8 +7,10 @@ import { resilienceAIProject } from './resilience-ai';
 import { digiAddictProject } from './digi-addict';
 import { misinformationSimulatorProject } from './misinformation-simulator';
 import { skinDiseaseProject } from './skin-disease-detection';
+import { skillhalflifeProject } from './skillhalflife';
 
 const raw = [
+  skillhalflifeProject,
   skinDiseaseProject,
   creditMateProject,
   poliseeProject,

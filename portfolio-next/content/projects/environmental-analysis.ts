@@ -15,6 +15,7 @@ const environmentalAnalysis: Project = {
     links: [
         { label: 'GitHub', url: 'https://github.com/batman-is-dark' }
     ],
+    dashboardUrl: 'https://ihsdubai-my.sharepoint.com/:u:/g/personal/39550_ihsdubai_org/IQDB3TItjOJGSq0oo1arQvvRAQhTRs6pu1F8UMBKtF63BvI?e=qugH7A',
     featured: true,
     images: {
         hero: '/images/projects/environmental-analysis.png',

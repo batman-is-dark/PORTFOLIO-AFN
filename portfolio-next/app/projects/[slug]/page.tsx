@@ -58,6 +58,21 @@ export default function ProjectDetailPage({ params }: PageProps) {
         <p>{project.impact}</p>
       </section>
 
+      {project.dashboardUrl && (
+        <section className={styles.section} aria-labelledby="dashboard-heading">
+          <h2 id="dashboard-heading">Interactive Dashboard</h2>
+          <div className="mt-6 rounded-lg overflow-hidden border border-accent/20">
+            <iframe
+              src={project.dashboardUrl}
+              className="w-full"
+              style={{ minHeight: '600px' }}
+              allowFullScreen
+              title="Project Dashboard"
+            />
+          </div>
+        </section>
+      )}
+
       {project.links && project.links.length > 0 && (
         <section className={styles.section} aria-labelledby="links-heading">
           <h2 id="links-heading">Links</h2>

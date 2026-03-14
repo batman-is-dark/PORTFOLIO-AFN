@@ -69,6 +69,7 @@ export const ProjectSchema = z.object({
   three: ThreeAssetSchema.nullable().optional(),
   images: ProjectImageSchema.optional(),
   links: z.array(ExternalLinkSchema).optional(),
+  dashboardUrl: z.string().url().optional(),
   featured: z.boolean().optional(),
 });
 export type Project = z.infer<typeof ProjectSchema>;

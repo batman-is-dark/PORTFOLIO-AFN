@@ -1,114 +1,62 @@
+/**
+ * ProjectsSection - Server component for the Projects section
+ */
 'use client';
 
-import { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { RadarView } from '../../components/projects/RadarView';
-import { FlightPathView } from '../../components/projects/FlightPathView';
-import { HangarView } from '../../components/projects/HangarView';
+'use client';
+
+import { useState } from 'react';
+import ProjectCoverflow from '../../components/projects/ProjectCoverflow';
 import { ViewToggle } from '../../components/projects/ViewToggle';
-import { CardStack } from '../../components/CardStack';
-import type { Project } from '../../types/content';
-import type { CarouselItem } from '../../types/ui';
+import { HangarView } from '../../components/projects/HangarView';
 import { projects } from '../../content/projects';
 
-// Enhanced view modes
-type ViewMode = 'radar' | 'path' | 'hangar' | 'showcase';
-
-  // Helper function to map Project to CarouselItem
-  function mapProjectToCarouselItem(project: Project): CarouselItem {
-    return {
-      id: project.slug,
-      slug: project.slug,
-      title: project.title,
-      role: project.role,
-      timeframe: project.timeframe,
-      summary: project.approach || project.outcomes || project.impact || '',
-      stack: project.stack,
-      image: project.images?.hero || project.images?.thumb || '',
-    };
-  }
+type ViewMode = 'path' | 'hangar' | 'showcase';
 
 export function ProjectsSection() {
   const [currentView, setCurrentView] = useState<ViewMode>('showcase');
 
-  // Handle project selection
-  const handleProjectSelect = useCallback((item: CarouselItem) => {
-    // Navigate to the project page using the slug from the item
-    window.location.href = `/projects/${item.slug}`;
-  }, []);
-
-  // Get project data and map to CarouselItem
-  const projectItems = projects.map(mapProjectToCarouselItem);
-
   return (
-    <section 
-      id="projects" 
-      aria-labelledby="projects-heading"
-      className="relative py-20 px-6 md:px-12 bg-[var(--color-bg)] overflow-hidden"
-    >
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-radar-grid opacity-30" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="flex flex-col items-center mb-16 space-y-6">
-          <motion.span 
-            className="text-[#00F0FF] font-sans text-xs uppercase tracking-[0.5em]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Portfolio
-          </motion.span>
-          
-          <motion.h2
-            id="projects-heading"
-            className="text-5xl md:text-7xl font-display font-bold text-primary tracking-tighter text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            Selected Works
-          </motion.h2>
-          
-          <motion.p
-            className="text-secondary text-lg max-w-2xl text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Explore my projects in AI, Data Science, and innovative solutions.
-            Each represents a unique challenge and creative approach.
-          </motion.p>
-          
-          {/* View Toggle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
+    <section id="projects" aria-labelledby="projects-heading" className="relative bg-bg overflow-hidden border-t border-white/5">
+      <div className="relative w-full max-w-7xl mx-auto px-6 pt-32 pb-12 z-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+          <div className="space-y-4">
+            <span className="text-accent font-sans text-xs uppercase tracking-[0.4em] block">
+              Portfolio
+            </span>
+            <h2
+              id="projects-heading"
+              className="text-6xl md:text-8xl font-display font-bold text-primary tracking-tighter"
+            >
+              Selected<br />Works
+            </h2>
+          </div>
+          <div className="flex flex-col items-end gap-4">
+            <div className="max-w-md">
+              <p className="text-secondary text-lg font-sans leading-relaxed">
+                A collection of projects exploring the intersection of AI, Robotics, and human-centric design. Navigate through each showcase.
+              </p>
+            </div>
             <ViewToggle currentView={currentView} onViewChange={setCurrentView} />
-          </motion.div>
+          </div>
         </div>
-        
-        {/* View Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentView}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {currentView === 'radar' && <RadarView />}
-            {currentView === 'path' && <FlightPathView />}
-            {currentView === 'hangar' && <HangarView />}
-            {currentView === 'showcase' && <CardStack items={projectItems} onProjectSelect={handleProjectSelect} />}
-          </motion.div>
-        </AnimatePresence>
+      </div>
+
+      {/* Dynamic View Rendering */}
+      <div className="relative w-full py-20 z-10">
+        {currentView === 'showcase' && <ProjectCoverflow projects={projects} />}
+        {currentView === 'hangar' && <HangarView projects={projects} />}
+        {currentView === 'path' && <div className="text-center text-secondary">Flight Path view coming soon...</div>}
+      </div>
+
+      {/* Fallback/Mobile List (Visible only on very small screens or if animation is hidden) */}
+      <div className="sr-only">
+        {projects.map((project, index) => (
+          <article key={project.slug || index}>
+             <h3>{project.title}</h3>
+             <p>{project.role}</p>
+          </article>
+        ))}
       </div>
     </section>
   );

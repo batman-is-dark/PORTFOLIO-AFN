@@ -16,12 +16,19 @@ export function HeroClient() {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+      {/* Colorful gradient backdrop */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="space-y-12"
+        className="space-y-12 relative z-10"
       >
         <div className="space-y-4">
           <motion.div 
@@ -71,7 +78,7 @@ export function HeroClient() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-50"
+        className="hidden"
         onClick={scrollToProjects}
         role="button"
         tabIndex={0}

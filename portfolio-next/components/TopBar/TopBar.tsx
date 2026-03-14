@@ -24,7 +24,7 @@ export default function TopBar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[999] pointer-events-none">
+    <div className="sticky top-0 w-full z-[999] pointer-events-none">
       <div className={`w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isScrolled ? 'p-4 sm:p-6' : 'p-0'}`}>
         <header
           className={`mx-auto w-full max-w-7xl pointer-events-auto transition-all duration-500 flex items-center justify-between ${

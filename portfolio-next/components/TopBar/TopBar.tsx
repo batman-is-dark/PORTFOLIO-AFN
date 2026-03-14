@@ -97,6 +97,7 @@ export default function TopBar() {
           </button>
         </div>
       </header>
+      </div>
     </div>
   );
 }

@@ -30,7 +30,7 @@ export default function TopBar() {
           className={`mx-auto w-full max-w-7xl pointer-events-auto transition-all duration-500 flex items-center justify-between ${
             isScrolled 
               ? 'rounded-full bg-surface/95 backdrop-blur-xl border border-accent/40 shadow-[0_8px_32px_rgba(255,51,0,0.15)] py-3 px-6 md:px-8' 
-              : 'rounded-none bg-bg/90 backdrop-blur-md pb-4 pt-6 md:pt-8 border-b-0 border-transparent shadow-none px-6 md:px-12'
+              : 'rounded-none bg-bg/90 backdrop-blur-md pb-2 pt-0 border-b-0 border-transparent shadow-none px-6 md:px-12'
           }`}
         >
         <Link href="/" className="flex items-center gap-4 group">

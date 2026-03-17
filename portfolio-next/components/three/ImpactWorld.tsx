@@ -10,6 +10,7 @@ import {
   PointMaterial, 
   PerspectiveCamera, 
   Html,
+  Text,
   Line,
   Environment,
   ContactShadows,
@@ -18,6 +19,7 @@ import {
 } from '@react-three/drei';
 import * as THREE from 'three';
 import { impactRoles, ImpactRole } from '../../content/impact';
+import { motion } from 'framer-motion-3d';
 
 /**
  * Centered Wireframe Core
@@ -38,6 +40,7 @@ function CentralCore() {
 
   return (
     <group ref={meshRef}>
+      {/* Glow Layer */}
       <Sphere args={[1.5, 32, 32]}>
         <meshBasicMaterial 
           color="#FF3300" 
@@ -48,6 +51,7 @@ function CentralCore() {
         />
       </Sphere>
 
+      {/* Solid Inner Core */}
       <mesh ref={sphereRef}>
         <sphereGeometry args={[1, 64, 64]} />
         <MeshDistortMaterial
@@ -61,7 +65,8 @@ function CentralCore() {
         />
       </mesh>
       
-      <Points>
+      {/* Floating Particles around core */}
+      <Points count={200}>
         <sphereGeometry args={[1.2, 16, 16]} />
         <PointMaterial 
             transparent 
@@ -72,6 +77,7 @@ function CentralCore() {
         />
       </Points>
 
+      {/* Orbit Rings */}
       {[5, 10, 15].map((radius, i) => (
           <mesh key={i} rotation={[Math.PI / 2, 0, 0]}>
               <ringGeometry args={[radius, radius + 0.02, 128]} />
@@ -83,6 +89,9 @@ function CentralCore() {
 }
 
 
+/**
+ * Starfield with faint movement
+ */
 function StarField() {
   const count = 3000;
   const positions = useMemo(() => {
@@ -121,6 +130,9 @@ function StarField() {
   );
 }
 
+/**
+ * Impact Station (Satellite)
+ */
 function ImpactStation({ 
     role, 
     active, 
@@ -132,12 +144,13 @@ function ImpactStation({
 }) {
   const meshRef = useRef<THREE.Group>(null);
   
+  // Calculate polar coordinates for a spherical layout
   const pos = useMemo(() => {
       const index = impactRoles.findIndex(r => r.id === role.id);
       const total = impactRoles.length;
       const phi = Math.acos(-1 + (2 * index) / total);
       const theta = Math.sqrt(total * Math.PI) * phi;
-      const radius = 8 + (index % 2) * 4;
+      const radius = 8 + (index % 2) * 4; // Alternate orbits
       
       return new THREE.Vector3(
         radius * Math.cos(theta) * Math.sin(phi),
@@ -157,6 +170,7 @@ function ImpactStation({
   return (
     <group position={pos} ref={meshRef}>
       <Float speed={2} rotationIntensity={active ? 1.5 : 0.5} floatIntensity={1}>
+        {/* The Station Core */}
         <mesh onClick={(e) => {
             e.stopPropagation();
             onClick(role.id);
@@ -170,11 +184,13 @@ function ImpactStation({
           />
         </mesh>
 
+        {/* Outer Ring */}
         <mesh rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[0.8, 0.01, 16, 64]} />
             <meshBasicMaterial color={role.color} transparent opacity={active ? 0.8 : 0.2} />
         </mesh>
 
+        {/* Connection to center */}
         {active && (
             <Line
                 points={[new THREE.Vector3(0, 0, 0), pos.clone().negate()]}
@@ -185,6 +201,7 @@ function ImpactStation({
             />
         )}
 
+        {/* Label Hovering */}
         <Html position={[0, 1, 0]} center distanceFactor={10}>
           <div 
             className={`transition-all duration-500 pointer-events-none whitespace-nowrap px-3 py-1 rounded-full border border-white/10 backdrop-blur-md ${
@@ -203,6 +220,9 @@ function ImpactStation({
   );
 }
 
+/**
+ * Camera Controller for smooth travel
+ */
 function CameraController({ activeId }: { activeId: string | null }) {
   const { camera } = useThree();
   const targetPos = useRef(new THREE.Vector3(20, 15, 20));
@@ -212,6 +232,7 @@ function CameraController({ activeId }: { activeId: string | null }) {
     if (activeId) {
       const role = impactRoles.find(r => r.id === activeId);
       if (role) {
+          // Find position (copy from ImpactStation logic)
           const index = impactRoles.findIndex(r => r.id === role.id);
           const total = impactRoles.length;
           const phi = Math.acos(-1 + (2 * index) / total);
@@ -224,9 +245,10 @@ function CameraController({ activeId }: { activeId: string | null }) {
             radius * Math.cos(phi)
           );
 
+          // Position camera slightly offset from station
           const camOffset = pos.clone().normalize().multiplyScalar(5);
           targetPos.current.copy(pos).add(camOffset);
-          lookAt.current.set(0, 0, 0);
+          lookAt.current.set(0, 0, 0); // Still look at center for gravity feel
       }
     } else {
       targetPos.current.set(20, 15, 20);
@@ -234,8 +256,9 @@ function CameraController({ activeId }: { activeId: string | null }) {
     }
   }, [activeId]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     camera.position.lerp(targetPos.current, 0.05);
+    state.camera.lookAt(lookAt.current);
   });
 
   return null;
@@ -253,7 +276,7 @@ export default function ImpactWorld({ activeId, setActiveId }: {
     >
       <PerspectiveCamera makeDefault position={[20, 15, 20]} fov={45} />
       
-      <ambientLight intensity={0.5} />
+      <ambientLight opacity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} color="#FF3300" />
       <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#FFFFFF" />
 
@@ -291,6 +314,9 @@ export default function ImpactWorld({ activeId, setActiveId }: {
   );
 }
 
+/**
+ * Constellation Lines connecting the sequence of impact
+ */
 function Constellation() {
   const points = useMemo(() => {
     return impactRoles.map((role, index) => {
@@ -316,6 +342,7 @@ function Constellation() {
         transparent
         opacity={0.3}
       />
+      {/* Dashed completion ring */}
       <Line
         points={[points[points.length - 1], points[0]]}
         color="#FF3300"
@@ -328,3 +355,4 @@ function Constellation() {
     </group>
   );
 }
+

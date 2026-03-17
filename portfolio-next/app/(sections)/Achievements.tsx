@@ -68,6 +68,18 @@ export function Achievements() {
 
   const certificates = [
     {
+      id: 'uae-innovaite',
+      icon: FileText,
+      rank: 'Participant',
+      title: 'UAE InnovAIte Hackathon',
+      organization: 'National Program for Coders',
+      description: 'Certificate of participation in the UAE InnovAIte Hackathon (January 9-11, 2026), an international hackathon organized by the UAE to promote innovation and coding excellence among developers.',
+      year: '2026',
+      color: 'from-amber-500 to-yellow-500',
+      imageUrl: '/certificates/Afnan K.A Rafi_CertificateOfParticipation_page-0001.jpg',
+      techTags: ['Hackathon', 'Innovation', 'AI', 'Coding'],
+    },
+    {
       id: 'kdsh',
       icon: FileText,
       rank: 'Participant (Round 1)',

@@ -65,7 +65,7 @@ function CentralCore() {
       </mesh>
       
       {/* Floating Particles around core */}
-      <Points count={200}>
+      <Points>
         <sphereGeometry args={[1.2, 16, 16]} />
         <PointMaterial 
             transparent 
@@ -275,7 +275,7 @@ export default function ImpactWorld({ activeId, setActiveId }: {
     >
       <PerspectiveCamera makeDefault position={[20, 15, 20]} fov={45} />
       
-      <ambientLight opacity={0.5} />
+      <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} color="#FF3300" />
       <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#FFFFFF" />
 

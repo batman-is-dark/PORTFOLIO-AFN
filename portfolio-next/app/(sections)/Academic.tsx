@@ -19,17 +19,20 @@ export function Academic() {
 
   const education = {
     school: 'The Indian High School, Dubai',
-    curriculum: 'CBSE Curriculum',
+    curriculum: 'CBSE Science Stream (Physics, Chemistry, Mathematics, Artificial Intelligence)',
     period: '2012-2026',
-    expectedAggregate: '85%',
-    coursework: ['Calculus', 'Linear Algebra', 'Probability & Statistics', 'Matrices', 'Python Programming', 'Information Technology'],
+    expectedGraduation: 'April 2026',
+    expectedAggregate: '84%',
+    coursework: ['Physics', 'Chemistry', 'Mathematics', 'Artificial Intelligence', 'English Core', 'Calculus', 'Linear Algebra'],
   };
 
   const certifications = [
-    { name: 'CS50P: Introduction to Python', issuer: 'Harvard University' },
-    { name: 'Scientific Computing with Python', issuer: 'FreeCodeCamp' },
-    { name: 'Data Analysis with Python', issuer: 'FreeCodeCamp' },
-    { name: 'Machine Learning with Python', issuer: 'FreeCodeCamp' },
+    { name: 'CS50P: Introduction to Programming with Python', issuer: 'Harvard University', url: '#' },
+    { name: 'Scientific Computing with Python', issuer: 'FreeCodeCamp', url: 'https://www.freecodecamp.org/certification/fccd1489690-8619-48c7-b91d-c32f74ae7dab/scientific-computing-with-python-v7' },
+    { name: 'Data Analysis with Python', issuer: 'FreeCodeCamp', url: 'https://www.freecodecamp.org/certification/fccd1489690-8619-48c7-b91d-c32f74ae7dab/data-analysis-with-python-v7' },
+    { name: 'Machine Learning & Scientific Computing with Python', issuer: 'FreeCodeCamp', url: '#' },
+    { name: 'Foundations of Generative AI Learning', issuer: 'Google Cloud', url: '#' },
+    { name: 'Data Science Coursework', issuer: 'IBM', url: '#' },
   ];
 
   return (

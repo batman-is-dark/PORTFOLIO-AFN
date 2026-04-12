@@ -1,18 +1,18 @@
 import { Project } from '../../types/content';
 
-const robotFish: Project = {
+export const robotFishProject: Project = {
     slug: 'robot-fish',
-    title: 'Autonomous Robot Fish',
-    role: 'Circuit Design Engineer',
+    title: 'Bio-Mimetic Robotic Fish',
+    role: 'Robotics Firmware Engineer',
     timeframe: '2025',
-    stack: ['Arduino', 'C++', 'Robotics', 'Circuit Design'],
-    problem: 'Ocean plastic pollution requires innovative, autonomous cleanup solutions.',
-    approach: 'Led circuit design and logic for a robotic fish prototype, optimizing response time by 25% and guiding a 3-member team.',
-    outcomes: 'Prototype demonstrated 95% plastic collection efficiency in tank tests.',
-    impact: 'Nominated for Best Innovation Award at Innovista; delivered prototype in just 2 weeks.',
-    reel: null,
-    three: null,
-    links: [],
+    stack: ['C++', 'Ultrasonic Sensors', 'L298N Drivers', 'Arduino', 'Embedded Systems'],
+    problem: 'Marine waste collection and autonomous navigation in aquatic environments require bio-mimetic systems that are efficient, stable, and environmentally safe.',
+    approach: 'Designed and debugged C++ firmware for a bio-mimetic robotic fish, integrating ultrasonic sensor fusion for advanced navigation and obstacle avoidance. Programmed motor control logic using L298N drivers with custom waterproof modular circuitry.',
+    outcomes: 'Improved navigation efficiency by 25% through advanced sensor fusion algorithms and achieved 95% plastic collection rate during field testing.',
+    impact: 'Validated system viability for large-scale maritime waste mitigation, demonstrating the effectiveness of bio-inspired robotics for environmental sustainability.',
+    links: [
+        { label: 'GitHub Repo', url: 'https://github.com/batman-is-dark' }
+    ],
     featured: true,
     images: {
         hero: '/images/projects/robot-fish.png',
@@ -20,4 +20,4 @@ const robotFish: Project = {
     }
 };
 
-export default robotFish;
+export default robotFishProject;

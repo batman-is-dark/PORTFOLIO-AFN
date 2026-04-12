@@ -29,25 +29,25 @@ export function Skills() {
     {
       title: 'Languages',
       icon: Code2,
-      skills: ['Python', 'C++', 'SQL', 'HTML', 'JavaScript', 'Arabic', 'English'],
+      skills: ['Python', 'C++', 'SQL', 'JavaScript', 'TypeScript', 'Java', 'Arabic', 'English'],
       color: 'from-blue-500 to-cyan-500',
     },
     {
       title: 'AI & Machine Learning',
       icon: BrainCircuit,
-      skills: ['TensorFlow', 'Keras', 'Scikit-Learn', 'NLTK', 'Pandas', 'NumPy', 'OpenCV'],
+      skills: ['TensorFlow', 'Keras', 'Scikit-Learn', 'PyTorch', 'Pandas', 'NumPy', 'OpenCV', 'K2 Think V2', 'LLM Orchestration'],
       color: 'from-purple-500 to-pink-500',
     },
     {
       title: 'Tools & Platforms',
       icon: Wrench,
-      skills: ['Git', 'Docker', 'Power BI', 'Streamlit', 'Arduino', 'Robotics', 'IBM Data Science'],
+      skills: ['React', 'Next.js', 'Git', 'Docker', 'Firebase', 'Streamlit', 'Power BI', 'Linux/Bash', 'LaTeX'],
       color: 'from-orange-500 to-red-500',
     },
     {
       title: 'Core Competencies',
       icon: Cpu,
-      skills: ['Data Analysis', 'Deductive Reasoning', 'Circuit Design', 'Scientific Computing'],
+      skills: ['Transfer Learning', 'Model Quantization', 'Stochastic Simulation', 'Computer Vision', 'Data Engineering', 'System Architecture'],
       color: 'from-green-500 to-emerald-500',
     }
   ];

@@ -8,15 +8,21 @@ import { digiAddictProject } from './digi-addict';
 import { misinformationSimulatorProject } from './misinformation-simulator';
 import { skinDiseaseProject } from './skin-disease-detection';
 import { skillhalflifeProject } from './skillhalflife';
+import { aeroLogicProject } from './aero-logic';
+import { swastaiProject } from './swastai';
+import { robotFishProject } from './robot-fish';
 
 const raw = [
+  aeroLogicProject,
   skillhalflifeProject,
+  swastaiProject,
   skinDiseaseProject,
   creditMateProject,
   poliseeProject,
   resilienceAIProject,
   digiAddictProject,
-  misinformationSimulatorProject
+  misinformationSimulatorProject,
+  robotFishProject
 ] as const;
 
 export const projects: Project[] = raw.map((p) => {

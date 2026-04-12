@@ -95,6 +95,18 @@ export function Achievements() {
 
   const certificates = [
     {
+      id: 'elite-coders-winter',
+      icon: FileText,
+      rank: 'Top 75% Ranking',
+      title: 'Elite Coders Winter of Code (ECWoC)',
+      organization: 'Elite Coders',
+      description: 'Certificate of Participation for actively participating in Elite Coders Winter of Code (ECWoC) among 5000+ participants, demonstrating dedication to open source and the developer community with creativity, dedication, and builder spirit throughout the event.',
+      year: '2025',
+      color: 'from-purple-500 to-indigo-500',
+      imageUrl: '/certificates/elite-coders-winter-2025.jpg',
+      techTags: ['Open Source', 'AI Engineering', 'Community', 'Agile Development'],
+    },
+    {
       id: 'uae-innovaite',
       icon: FileText,
       rank: 'Participant',

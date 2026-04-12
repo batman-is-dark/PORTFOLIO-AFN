@@ -11,8 +11,8 @@ export const aeroLogicProject: Project = {
   outcomes: 'A hybrid optimization layer integrating mathematical cost functions with multi-step AI reasoning to sequence tightly coupled tasks (fueling, catering, boarding) while maintaining strict safety and operational constraints.',
   impact: 'Explainable AI dashboard visualizing Gantt timelines and resource usage, making optimal vs. rational decisions explicit, interpretable, and auditable through reasoning output.',
   links: [
-    { label: 'Live Demo', url: '#' },
-    { label: 'Video Overview', url: '#' }
+    { label: 'Live Demo', url: 'https://aero-logi.vercel.app' },
+    { label: 'Video Overview', url: 'https://drive.google.com/file/d/1ALSwp2gwu_Z76KpvQbJh7a0zAKSH1wmf/view?usp=drive_link' }
   ],
   featured: true,
   images: {
